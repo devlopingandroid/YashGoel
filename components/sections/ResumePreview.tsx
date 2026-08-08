@@ -1,12 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { personalInfo, resumeData } from "@/data/portfolio-data";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import ResumeModal from "@/components/ui/ResumeModal";
 import {
   FileDown,
   CheckCircle2,
@@ -14,9 +15,11 @@ import {
   FileText,
   Briefcase,
   Code,
+  Eye,
 } from "lucide-react";
 
 export const ResumePreview: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const circleRadius = 54;
   const circumference = 2 * Math.PI * circleRadius; // ~339.29
   const scorePercent = resumeData.atsScore / 100;
@@ -231,19 +234,39 @@ export const ResumePreview: React.FC = () => {
               </div>
             </div>
 
-            {/* Download Resume Button */}
-            <Button
-              href={personalInfo.resumeUrl}
-              variant="primary"
-              size="lg"
-              className="w-full justify-center text-base py-3.5"
-              icon={<FileDown className="w-5 h-5" />}
-            >
-              Download Full Resume
-            </Button>
+            {/* Action Buttons: Preview & Download */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <Button
+                onClick={() => setIsModalOpen(true)}
+                variant="outline"
+                size="lg"
+                className="w-full justify-center text-sm py-3"
+                icon={<Eye className="w-4 h-4" />}
+              >
+                Preview Resume
+              </Button>
+
+              <Button
+                href={personalInfo.resumeUrl}
+                download="Yash_Goel.pdf"
+                target="_blank"
+                variant="primary"
+                size="lg"
+                className="w-full justify-center text-sm py-3"
+                icon={<FileDown className="w-4 h-4" />}
+              >
+                Download Resume
+              </Button>
+            </div>
           </Card>
         </motion.div>
       </div>
+
+      {/* Interactive Resume Modal Overlay */}
+      <ResumeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };

@@ -7,6 +7,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
   href?: string;
+  download?: boolean | string;
+  target?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -17,6 +19,8 @@ export const Button: React.FC<ButtonProps> = ({
   iconPosition = "left",
   className = "",
   href,
+  download,
+  target,
   ...props
 }) => {
   const baseStyles =
@@ -40,8 +44,15 @@ export const Button: React.FC<ButtonProps> = ({
   const combinedClasses = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
   if (href) {
+    const isPdf = href.endsWith(".pdf");
     return (
-      <a href={href} className={combinedClasses}>
+      <a
+        href={href}
+        className={combinedClasses}
+        download={download !== undefined ? download : isPdf ? true : undefined}
+        target={target || (isPdf ? "_blank" : undefined)}
+        rel={isPdf ? "noopener noreferrer" : undefined}
+      >
         {icon && iconPosition === "left" && <span>{icon}</span>}
         <span>{children}</span>
         {icon && iconPosition === "right" && <span>{icon}</span>}

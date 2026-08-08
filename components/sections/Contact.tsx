@@ -16,7 +16,7 @@ import {
   Check,
   Mail,
 } from "lucide-react";
-import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram } from "react-icons/fa6";
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 interface FormState {
   name: string;
@@ -90,7 +90,7 @@ export const Contact: React.FC = () => {
     {
       id: "github",
       name: "GitHub",
-      handle: "@yashgoel",
+      handle: "@devlopingandroid",
       url: personalInfo.socialLinks.github,
       icon: <FaGithub className="w-5 h-5 text-primary group-hover:text-accent-teal transition-colors" />,
       badgeColor: "border-accent-teal/30 hover:border-accent-teal/60",
@@ -98,7 +98,7 @@ export const Contact: React.FC = () => {
     {
       id: "linkedin",
       name: "LinkedIn",
-      handle: "in/yashgoel",
+      handle: "in/yash-goelcs",
       url: personalInfo.socialLinks.linkedin,
       icon: <FaLinkedin className="w-5 h-5 text-[#0A66C2]" />,
       badgeColor: "border-[#0A66C2]/30 hover:border-[#0A66C2]/60",
@@ -106,18 +106,10 @@ export const Contact: React.FC = () => {
     {
       id: "twitter",
       name: "Twitter / X",
-      handle: "@yashgoel",
+      handle: "@yashbuilds_",
       url: personalInfo.socialLinks.twitter,
       icon: <FaXTwitter className="w-5 h-5 text-primary group-hover:text-cyan-400 transition-colors" />,
       badgeColor: "border-cyan-500/30 hover:border-cyan-500/60",
-    },
-    {
-      id: "instagram",
-      name: "Instagram",
-      handle: "@yashgoel",
-      url: personalInfo.socialLinks.instagram,
-      icon: <FaInstagram className="w-5 h-5 text-[#E4405F]" />,
-      badgeColor: "border-[#E4405F]/30 hover:border-[#E4405F]/60",
     },
   ];
 

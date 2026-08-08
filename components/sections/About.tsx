@@ -7,26 +7,28 @@ import { aboutData, personalInfo } from "@/data/portfolio-data";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Card from "@/components/ui/Card";
 import {
+  Server,
   Brain,
-  Zap,
-  Users,
-  Compass,
-  Infinity as InfinityIcon,
-  Sparkles,
-  Milestone,
+  Terminal,
+  Rocket,
+  ShieldCheck,
   Code2,
+  Trophy,
+  Sparkles,
+  FileCode,
+  CheckCircle2,
 } from "lucide-react";
 
-const getTraitIcon = (iconName: string) => {
+const getSkillIcon = (iconName: string) => {
   switch (iconName) {
+    case "Server":
+      return <Server className="w-4 h-4 text-accent-teal" />;
     case "Brain":
       return <Brain className="w-4 h-4 text-accent-teal" />;
-    case "Zap":
-      return <Zap className="w-4 h-4 text-accent-teal" />;
-    case "Users":
-      return <Users className="w-4 h-4 text-accent-teal" />;
-    case "Compass":
-      return <Compass className="w-4 h-4 text-accent-teal" />;
+    case "Terminal":
+      return <Terminal className="w-4 h-4 text-accent-teal" />;
+    case "Rocket":
+      return <Rocket className="w-4 h-4 text-accent-teal" />;
     default:
       return <Sparkles className="w-4 h-4 text-accent-teal" />;
   }
@@ -37,8 +39,10 @@ export const About: React.FC = () => {
     <section id="about" className="pt-4 md:pt-6 pb-12 md:pb-16 scroll-mt-4 md:scroll-mt-6 border-t border-dark-border/40">
       <SectionBadge title="About Me" className="mb-6" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
-        {/* Left Column: Bio Paragraphs, Trait Pills, & Highlight Stats */}
+      {/* Main Grid: Left Details & Right Interactive Profile Hero */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-10">
+        
+        {/* Left Column: Impactful Title, 3 Short Paragraphs, Core Competencies, Proof Stats */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -46,33 +50,43 @@ export const About: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="lg:col-span-7 flex flex-col gap-6"
         >
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-primary flex items-center gap-3">
-            <span>{aboutData.heading}</span>
-            <span className="h-[2px] w-12 bg-accent-teal/40" />
-          </h3>
+          {/* Header & Subtitle */}
+          <div className="space-y-2">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight leading-tight">
+              {aboutData.heading}
+            </h3>
+            <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono font-semibold text-accent-teal bg-accent-teal/10 px-3 py-1 rounded-full border border-accent-teal/20">
+              <Sparkles className="w-3.5 h-3.5 text-accent-teal animate-pulse" />
+              <span>{aboutData.subheading}</span>
+            </div>
+          </div>
 
-          {/* Paragraphs */}
-          <div className="space-y-4 text-muted text-base sm:text-lg leading-relaxed">
+          {/* 3 Short Impactful Bio Paragraphs */}
+          <div className="space-y-3 text-muted text-sm sm:text-base leading-relaxed">
             {aboutData.paragraphs.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
+              <div key={index} className="flex items-start gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-accent-teal shrink-0 mt-1" />
+                <p className="font-normal text-primary/95">{paragraph}</p>
+              </div>
             ))}
           </div>
 
-          {/* 2x2 Grid of Trait Pills */}
-          <div className="pt-2">
-            <h4 className="text-xs font-mono text-muted uppercase tracking-wider mb-3">
-              Core Mindset & Traits
+          {/* Core Competencies (Skill-focused, replacing personality adjectives) */}
+          <div className="pt-1">
+            <h4 className="text-xs font-mono text-muted uppercase tracking-wider mb-3 flex items-center gap-2">
+              <Terminal className="w-3.5 h-3.5 text-accent-teal" />
+              Core Competencies
             </h4>
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {aboutData.traits.map((trait) => (
                 <div
                   key={trait.id}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-dark-surface/90 border border-dark-border hover:border-accent-teal/30 hover:shadow-teal-glow transition-all"
+                  className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-dark-surface/90 border border-dark-border hover:border-accent-teal/40 hover:shadow-teal-glow transition-all group"
                 >
-                  <div className="p-1.5 rounded-lg bg-accent-teal/10">
-                    {getTraitIcon(trait.iconName)}
+                  <div className="p-2 rounded-lg bg-accent-teal/10 group-hover:scale-110 transition-transform">
+                    {getSkillIcon(trait.iconName)}
                   </div>
-                  <span className="text-sm font-semibold text-primary">
+                  <span className="text-xs sm:text-sm font-bold text-primary tracking-tight">
                     {trait.label}
                   </span>
                 </div>
@@ -80,31 +94,31 @@ export const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Stat Row */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+          {/* Proof-Backed Metric Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
             {aboutData.stats.map((stat) => (
               <Card
                 key={stat.id}
                 hoverGlow={true}
-                className={`p-4 text-center flex flex-col items-center justify-center gap-1 ${
+                className={`p-3.5 text-center flex flex-col items-center justify-center gap-1 ${
                   stat.isHighlight
-                    ? "border-accent-teal/60 bg-accent-teal/5 shadow-teal-glow"
-                    : "bg-dark-surface/80"
+                    ? "border-accent-teal/70 bg-gradient-to-b from-dark-surface to-accent-teal/15 shadow-teal-glow"
+                    : "bg-dark-surface/90 border-dark-border"
                 }`}
               >
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1">
                   {stat.isHighlight && (
-                    <InfinityIcon className="w-5 h-5 text-accent-teal animate-pulse" />
+                    <ShieldCheck className="w-4 h-4 text-accent-teal animate-pulse" />
                   )}
                   <span
-                    className={`text-2xl sm:text-3xl font-extrabold font-mono ${
+                    className={`text-xl sm:text-2xl font-extrabold font-mono ${
                       stat.isHighlight ? "text-accent-teal" : "text-primary"
                     }`}
                   >
                     {stat.number}
                   </span>
                 </div>
-                <span className="text-xs font-medium text-muted">
+                <span className="text-[11px] font-medium text-muted leading-tight">
                   {stat.label}
                 </span>
               </Card>
@@ -112,26 +126,31 @@ export const About: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Right Column: Mirrored Circular Glowing Profile Image */}
+        {/* Right Column: Rotating Ring Image, Recruiter Hooks Glass Card, & Mini Timeline */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="lg:col-span-5 flex justify-center items-center relative"
+          className="lg:col-span-5 flex flex-col items-center gap-6"
         >
-          <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
-            {/* Mirrored Glowing Radial Gradient Blob */}
-            <div className="absolute inset-0 bg-gradient-to-bl from-accent-teal/25 via-accent-teal/10 to-transparent rounded-full blur-2xl animate-pulse" />
-            <div className="absolute -inset-4 rounded-full border border-accent-teal/20 animate-spin-slow" />
+          {/* Profile Image Frame with Slow Rotating Glow Ring & Ambient AI Grid */}
+          <div className="relative w-56 h-56 sm:w-72 sm:h-72 flex items-center justify-center">
+            
+            {/* Ambient AI Grid Glow */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-accent-teal/20 via-blue-500/10 to-purple-500/20 rounded-full blur-2xl animate-pulse" />
 
-            {/* Circular Profile Frame */}
-            <div className="relative w-full h-full rounded-full p-2 border-2 border-accent-teal/40 bg-dark-surface shadow-2xl overflow-hidden group">
+            {/* Outer Slow Rotating Neon Glow Ring */}
+            <div className="absolute -inset-3 rounded-full border-2 border-dashed border-accent-teal/60 animate-spin-slow" />
+            <div className="absolute -inset-6 rounded-full border border-accent-teal/20" />
+
+            {/* Circular Image Container */}
+            <div className="relative w-full h-full rounded-full p-2 border-2 border-accent-teal/60 bg-dark-surface shadow-[0_0_40px_rgba(20,232,196,0.25)] overflow-hidden group">
               <div className="w-full h-full rounded-full overflow-hidden relative">
                 <img
-                  src={personalInfo.avatarUrl}
+                  src="/about.jpeg"
                   alt={personalInfo.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-[78%_55%] scale-110 group-hover:scale-115 transition-transform duration-500"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
                     const fallbackDiv = e.currentTarget.parentElement?.querySelector(
@@ -151,87 +170,34 @@ export const About: React.FC = () => {
                 </div>
               </div>
             </div>
-
-            {/* Floating Experience Badge */}
-            <motion.div
-              animate={{ y: [6, -6, 6] }}
-              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-2 right-0 sm:-right-4 z-20"
-            >
-              <Card className="p-3 shadow-2xl bg-dark-surface/95 border border-accent-teal/30 backdrop-blur-md flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-accent-teal/20">
-                  <Milestone className="w-5 h-5 text-accent-teal" />
-                </div>
-                <div className="text-left">
-                  <span className="block text-xs font-bold text-primary">
-                    Continuous Growth
-                  </span>
-                  <span className="block text-[11px] font-mono text-muted">
-                    Always Coding & Learning
-                  </span>
-                </div>
-              </Card>
-            </motion.div>
           </div>
-        </motion.div>
-      </div>
 
-      {/* Horizontal "My Journey" Timeline */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="mt-12 pt-8 border-t border-dark-border/60"
-      >
-        <div className="flex items-center justify-between mb-8">
-          <h4 className="text-xl font-bold text-primary flex items-center gap-2">
-            <Milestone className="w-5 h-5 text-accent-teal" />
-            <span>My Journey</span>
-          </h4>
-          <span className="text-xs font-mono text-muted hidden sm:block">
-            Scroll horizontally →
-          </span>
-        </div>
+          {/* Recruiter Hook Glass Card */}
+          <div className="w-full rounded-2xl bg-dark-surface/90 border-2 border-accent-teal/50 p-4 sm:p-5 backdrop-blur-xl shadow-[0_0_30px_rgba(20,232,196,0.15)] space-y-3">
+            <h4 className="text-xs font-mono font-bold text-accent-teal uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-dark-border/60">
+              <Trophy className="w-4 h-4 text-accent-teal" />
+              Key Career Highlights
+            </h4>
 
-        {/* Timeline Container with horizontal scroll on mobile */}
-        <div className="overflow-x-auto pb-6 pt-4 scrollbar-thin">
-          <div className="min-w-[640px] px-4 relative">
-            {/* Connecting Horizontal Line */}
-            <div className="absolute top-7 left-8 right-8 h-[2px] bg-dark-border -z-0" />
-
-            {/* Timeline Nodes */}
-            <div className="grid grid-cols-4 gap-6 relative z-10">
-              {aboutData.journey.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex flex-col items-center text-center group"
-                >
-                  {/* Year Tag Above Dot */}
-                  <span className="text-xs font-mono font-bold text-accent-teal mb-2 bg-accent-teal/10 px-2.5 py-1 rounded-md border border-accent-teal/20">
-                    {item.year}
-                  </span>
-
-                  {/* Timeline Dot */}
-                  <div className="w-5 h-5 rounded-full bg-dark-bg border-2 border-accent-teal flex items-center justify-center my-1 group-hover:scale-125 transition-transform shadow-teal-glow">
-                    <span className="w-2 h-2 rounded-full bg-accent-teal" />
+            <div className="space-y-2.5">
+              {aboutData.recruiterHooks.map((hook, idx) => (
+                <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm">
+                  <span className="text-base leading-none shrink-0 mt-0.5">{hook.icon}</span>
+                  <div>
+                    <span className="font-bold text-primary block leading-tight">
+                      {hook.title}
+                    </span>
+                    <span className="text-[11px] font-mono text-muted">
+                      {hook.desc}
+                    </span>
                   </div>
-
-                  {/* Milestone Card Below Dot */}
-                  <Card className="mt-3 p-4 w-full text-left bg-dark-surface/90 border-dark-border group-hover:border-accent-teal/40 transition-colors">
-                    <h5 className="text-sm font-bold text-primary mb-1">
-                      {item.title}
-                    </h5>
-                    <p className="text-xs text-muted leading-relaxed">
-                      {item.description}
-                    </p>
-                  </Card>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      </motion.div>
+
+        </motion.div>
+      </div>
     </section>
   );
 };

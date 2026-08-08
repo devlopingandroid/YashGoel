@@ -14,7 +14,7 @@ export interface PersonalInfo {
     github: string;
     linkedin: string;
     twitter: string;
-    instagram: string;
+    instagram?: string;
   };
 }
 
@@ -51,6 +51,8 @@ export interface ExperienceItem {
   period: string;
   location: string;
   current?: boolean;
+  projectHighlight?: string;
+  theme?: "teal" | "blue" | "purple";
   bullets: string[];
   technologies: string[];
 }
@@ -58,48 +60,57 @@ export interface ExperienceItem {
 export const experienceData: ExperienceItem[] = [
   {
     id: "exp-infosys",
-    role: "Software Engineering Intern",
+    role: "Software Development Intern",
     company: "Infosys Springboard",
-    logoUrl: "/logos/infosys.png",
-    period: "2024 - Present",
-    location: "Remote / Virtual",
+    logoUrl: "/logos/infosys.jpg",
+    period: "Jul 2026 – Sep 2026",
+    location: "Remote",
     current: true,
+    projectHighlight: "Civic Complaint Management System",
+    theme: "teal",
     bullets: [
-      "Completed intensive hands-on internship in full-stack software development, cloud computing, and enterprise application architecture.",
-      "Engineered scalable web applications using Java, React, and RESTful web microservices following clean code design patterns.",
-      "Collaborated on team capstone projects implementing automated testing pipelines, Git workflows, and CI/CD deployment."
+      "Engineered full-stack Civic Complaint Management System with Angular, Spring Boot, & MySQL featuring JWT auth and role-based access control.",
+      "Designed RESTful APIs for complaint registration, assignment workflows, status tracking, and admin dashboards.",
+      "Optimized MySQL database queries and backend services, significantly enhancing system responsiveness and scalability.",
+      "Collaborated using Git-based workflows adhering to enterprise software engineering standards."
     ],
-    technologies: ["Java", "React", "Node.js", "REST APIs", "SQL", "Git"],
+    technologies: ["Angular", "SpringBoot", "Java", "MySQL", "JWT", "REST API", "Git"],
   },
   {
     id: "exp-drdo",
-    role: "Research Intern",
+    role: "Software Intern",
     company: "DRDO SSPL",
     logoUrl: "/logos/drdo.png",
-    period: "2023 - 2024",
+    period: "Jun 2026 – Aug 2026",
     location: "Delhi, India",
     current: false,
+    projectHighlight: "Budget Management Platform",
+    theme: "blue",
     bullets: [
-      "Conducted advanced research on image signal processing and computer vision algorithms for solid-state applications.",
-      "Developed high-throughput data processing modules using Python, OpenCV, and NumPy.",
-      "Optimized computational performance for real-time sensor data analysis alongside senior research scientists."
+      "Developed an enterprise Budget Management Platform for expenditure tracking, budget allocation, and financial record management.",
+      "Built scalable backend microservices in Java & Spring Boot in collaboration with DRDO research scientists.",
+      "Contributed to core architecture design and optimization of mission-critical software components.",
+      "Enhanced system maintainability and operational efficiency through rigorous automated testing."
     ],
-    technologies: ["Python", "OpenCV", "NumPy", "C++", "Signal Processing"],
+    technologies: ["Java", "SpringBoot", "MySQL", "Backend", "Git", "Software Development"],
   },
   {
     id: "exp-iiitd",
-    role: "Research Intern",
+    role: "Summer Research Intern",
     company: "IIIT Delhi",
-    logoUrl: "/logos/iiitd.png",
-    period: "2023",
+    logoUrl: "/logos/iiitd.jpg",
+    period: "Jun 2025 – Aug 2025",
     location: "New Delhi, India",
     current: false,
+    projectHighlight: "Healthcare Sensor Analytics",
+    theme: "purple",
     bullets: [
-      "Researched deep learning architectures and graph neural networks for complex dataset analysis.",
-      "Engineered automated model training and validation pipelines using PyTorch and Scikit-Learn.",
-      "Presented benchmarking analysis and experimental results at departmental technical seminars."
+      "Engineered Python data pipelines analyzing 10,000+ physiological sensor records for medical AI research.",
+      "Built modular preprocessing utilities streamlining large-scale healthcare dataset normalization.",
+      "Assisted in research-driven data analysis workflows and algorithmic experimental validation.",
+      "Automated feature extraction techniques to improve data processing pipeline efficiency."
     ],
-    technologies: ["PyTorch", "Deep Learning", "Python", "Data Analysis", "Scikit-Learn"],
+    technologies: ["Python", "Data Analysis", "Healthcare AI", "Research", "NumPy", "Data Processing"],
   },
 ];
 
@@ -235,29 +246,30 @@ export interface JourneyMilestone {
 }
 
 export const aboutData = {
-  heading: "Who am I?",
+  heading: "Building Scalable Software & AI-Powered Products",
+  subheading: "Software Engineer | Full-Stack Developer | Hackathon Winner",
   paragraphs: [
-    "I am a passionate Software Engineer dedicated to crafting modern web applications, scalable cloud backend systems, and solving complex algorithmic challenges. With a deep curiosity for emerging technologies, I thrive at the intersection of design, code, and user experience.",
-    "My journey spans across software internships, high-impact hackathons, and technical projects. I enjoy turning complex problem statements into clean, maintainable, and visually captivating digital products."
+    "B.Tech Computer Science student at VIPS Delhi with enterprise engineering experience across DRDO SSPL, IIIT Delhi, and Infosys Springboard.",
+    "I build scalable full-stack applications and backend services using Java, Spring Boot, React, Node.js, and cloud technologies."
   ],
   traits: [
-    { id: "trait-1", label: "Problem Solver", iconName: "Brain" },
-    { id: "trait-2", label: "Quick Learner", iconName: "Zap" },
-    { id: "trait-3", label: "Team Player", iconName: "Users" },
-    { id: "trait-4", label: "Tech Enthusiast", iconName: "Compass" }
+    { id: "skill-1", label: "Backend Systems", iconName: "Server" },
+    { id: "skill-2", label: "AI & Research", iconName: "Brain" },
+    { id: "skill-3", label: "Competitive Coding", iconName: "Terminal" },
+    { id: "skill-4", label: "Product Building", iconName: "Rocket" }
   ] as TraitItem[],
   stats: [
-    { id: "astat-1", number: "2+", label: "Years Experience" },
-    { id: "astat-2", number: "10+", label: "Technologies" },
-    { id: "astat-3", number: "20+", label: "Hackathons" },
-    { id: "astat-4", number: "∞", label: "Curiosity", isHighlight: true, iconName: "Infinity" }
+    { id: "astat-1", number: "3", label: "Software & Research Internships" },
+    { id: "astat-2", number: "150+", label: "DSA Problems Solved" },
+    { id: "astat-3", number: "20+", label: "Hackathons & Events" },
+    { id: "astat-4", number: "3", label: "Published Patents", isHighlight: true }
   ] as AboutStat[],
-  journey: [
-    { id: "j1", year: "2021", title: "First Line of Code", description: "Started learning C++ and DSA." },
-    { id: "j2", year: "2022", title: "Full-Stack Web Dev", description: "Mastered React, Node.js & databases." },
-    { id: "j3", year: "2023", title: "Hackathons & Internships", description: "Won competitions & software internships." },
-    { id: "j4", year: "2024", title: "Advanced Systems", description: "Building AI apps & scalable architecture." }
-  ] as JourneyMilestone[]
+  recruiterHooks: [
+    { icon: "🏆", title: "Qualcomm Multiverse Winner", desc: "Snapdragon AI & IoT Hardware Bot" },
+    { icon: "🚀", title: "Gemini Student Ambassador 2026", desc: "Official Google Campus AI Face" },
+    { icon: "📜", title: "3 Published Technical Patents", desc: "IoT Sensors & Hardware Telemetry" },
+    { icon: "💻", title: "150+ LeetCode Problems", desc: "Data Structures & Algorithms" },
+  ]
 };
 
 export const footerData = {
@@ -288,8 +300,9 @@ export const footerData = {
       title: "Connect",
       links: [
         { label: "Contact", href: "#contact" },
-        { label: "GitHub", href: "https://github.com" },
-        { label: "LinkedIn", href: "https://linkedin.com" },
+        { label: "GitHub", href: "https://github.com/devlopingandroid" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/yash-goelcs/" },
+        { label: "Twitter / X", href: "https://x.com/yashbuilds_" },
       ],
     },
     {
@@ -314,7 +327,7 @@ export const resumeData = {
     { label: "Readability & Parsing", passed: true, score: "96%" },
     { label: "Industry Keywords Optimization", passed: true, score: "92%" },
   ],
-  downloadUrl: "/resume.pdf",
+  downloadUrl: "/Yash_Goel.pdf",
 };
 
 export const personalInfo: PersonalInfo = {
@@ -325,15 +338,14 @@ export const personalInfo: PersonalInfo = {
   greeting: "Hi, I'm",
   tagline: "Passionate about building scalable web applications, sleek user experiences, and high-performance algorithms.",
   avatarUrl: "/profile.png",
-  resumeUrl: "#resume",
+  resumeUrl: "/Yash_Goel.pdf",
   email: "yashgoel.dev@gmail.com",
   phone: "+91 98765 43210",
   location: "Delhi, India",
   socialLinks: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    twitter: "https://twitter.com",
-    instagram: "https://instagram.com",
+    github: "https://github.com/devlopingandroid",
+    linkedin: "https://www.linkedin.com/in/yash-goelcs/",
+    twitter: "https://x.com/yashbuilds_",
   },
 };
 
@@ -567,17 +579,17 @@ export const projectsData: Project[] = [
     description: "High-performance video streaming platform featuring real-time chat, adaptive bitrate, and custom video analytics.",
     techBadges: ["Next.js", "TypeScript", "Tailwind", "WebSockets", "AWS S3"],
     image: "/projects/streamify.jpg",
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    githubUrl: "https://github.com/devlopingandroid/Streamiify",
+    liveUrl: "https://streamiify-psi.vercel.app/landing",
     featured: true,
   },
   {
-    id: "proj-pulsedrive",
-    title: "PulseDrive",
-    tag: "IoT + AI",
-    description: "Smart vehicle telemetry and diagnostic monitoring system providing real-time sensor analytics and collision detection.",
-    techBadges: ["Python", "TensorFlow", "FastAPI", "React", "Docker"],
-    image: "/projects/pulsedrive.jpg",
+    id: "proj-skillforge",
+    title: "SkillForge",
+    tag: "AI + Coding Platform",
+    description: "AI-powered interactive coding platform featuring intelligent code evaluation, personalized learning paths, and real-time execution.",
+    techBadges: ["Next.js", "TypeScript", "Tailwind", "Python", "AI/ML"],
+    image: "/projects/skillforge.jpg",
     githubUrl: "https://github.com",
     liveUrl: "https://example.com",
     featured: true,
@@ -647,47 +659,146 @@ export const certificatesData: Certificate[] = [
   },
 ];
 
+export interface Achievement {
+  id: string;
+  title: string;
+  subtitle: string;
+  year: string;
+  image: string;
+  tag: string;
+  isHero?: boolean;
+  description: string;
+}
+
 export const achievementsData: Achievement[] = [
   {
     id: "ach-gemini",
-    title: "Google Gemini Student Ambassador",
-    subtitle: "Google AI",
+    title: "Google Gemini Student Ambassador 2026",
+    subtitle: "Google Student Ambassador Program",
     year: "2026",
-    iconName: "Sparkles",
+    image: "/achievements/achieve-10.jpeg",
+    tag: "Google Ambassador",
     isHero: true,
-    description: "Selected as campus AI ambassador representing Google Gemini tools, workshops, and developer events.",
+    description: "Selected as the Official Google Student Ambassador (Gemini Campus Face 2026). Received official Google ambassador kit, laptop sleeve, apparel, and leads campus generative AI workshops.",
+  },
+  {
+    id: "ach-qualcomm-win",
+    title: "Qualcomm Multiverse Hackathon Winner",
+    subtitle: "Snapdragon AI & Hardware Bot",
+    year: "2026",
+    image: "/achievements/achieve-5.jpeg",
+    tag: "Hackathon Winner",
+    isHero: true,
+    description: "Secured top victory at Qualcomm Multiverse Hackathon after developing an autonomous IoT hardware bot powered by Snapdragon AI edge computing.",
+  },
+  {
+    id: "ach-iitd-top100",
+    title: "IIT Delhi College Youth Ideathon Top 100",
+    subtitle: "Indian Institute of Technology Delhi",
+    year: "2025",
+    image: "/achievements/achieve-3.jpg",
+    tag: "Top 100 India",
+    isHero: true,
+    description: "Awarded Top 100 India Certificate of Achievement & Medal at IIT Delhi in India's largest college entrepreneurship competition.",
+  },
+  {
+    id: "ach-qualcomm-hq",
+    title: "Qualcomm HQ Victory Presentation",
+    subtitle: "Qualcomm Bangalore HQ",
+    year: "2026",
+    image: "/achievements/achieve-7.jpeg",
+    tag: "National Winner",
+    description: "Celebrated overall hackathon victory with engineering leaders at Qualcomm HQ after demonstrating real-time edge processing.",
   },
   {
     id: "ach-patents",
-    title: "Published Technical Patents",
+    title: "3 Published Technical Patents",
     subtitle: "Intellectual Property India",
-    year: "2024",
-    iconName: "ShieldCheck",
-    description: "Authored 3 registered patents in smart systems and algorithmic optimization.",
+    year: "2024 - 2025",
+    image: "/achievements/achieve-11.jpeg",
+    tag: "Innovation & IP",
+    description: "Engineered IoT physiological sensor arrays and custom hardware telemetry modules resulting in 3 published technical patents.",
   },
   {
-    id: "ach-ideathon",
-    title: "Top 100 College Youth Ideathon",
-    subtitle: "IIIT Delhi 2024",
-    year: "2024",
-    iconName: "Trophy",
-    description: "Ranked among top 100 innovative tech ideas out of thousands of national entries.",
-  },
-  {
-    id: "ach-drdo",
-    title: "DRDO Research Fellow",
-    subtitle: "Solid State Physics Laboratory 2025",
+    id: "ach-sih-pitch",
+    title: "Civic Complaint Management System Pitch",
+    subtitle: "Smart India Hackathon Presentation",
     year: "2025",
-    iconName: "Award",
-    description: "Recognized for research contributions in computer vision & signal processing.",
+    image: "/achievements/achieve-13.jpeg",
+    tag: "System Architecture",
+    description: "Pitched full-stack Civic Complaint Management System architecture, automated routing workflows, and administrative dashboards before evaluation panels.",
   },
   {
-    id: "ach-sih",
-    title: "Smart India Hackathon Finalist",
-    subtitle: "Ministry of Education 2023",
-    year: "2023",
-    iconName: "Medal",
-    description: "National finalist developing automated IoT telemetry and diagnostic solutions.",
+    id: "ach-st-micro",
+    title: "STMicroelectronics Industrial Visit",
+    subtitle: "STMicroelectronics Semiconductor Facility",
+    year: "2025",
+    image: "/achievements/achieve-8.jpeg",
+    tag: "Industrial Visit",
+    description: "Participated in an industrial visit to STMicroelectronics semiconductor facility, exploring advanced hardware architecture and embedded microelectronics.",
+  },
+  {
+    id: "ach-iitd-campus",
+    title: "Honored at IIT Delhi Campus",
+    subtitle: "IIT Delhi Main Campus",
+    year: "2025",
+    image: "/achievements/achieve-4.jpg",
+    tag: "National Honor",
+    description: "Honored at the main Indian Institute of Technology Delhi building for selection in Top 100 India Youth Ideathon.",
+  },
+  {
+    id: "ach-sbi-ideathon",
+    title: "SBI College Youth Ideathon Showcase",
+    subtitle: "Nayi Soch Naya Bharat",
+    year: "2025",
+    image: "/achievements/achieve-2.jpg",
+    tag: "Startup & Ideathon",
+    description: "Represented innovative college startup ideation in India's premier entrepreneurship showcase.",
+  },
+  {
+    id: "ach-qualcomm-delegation",
+    title: "Snapdragon Multiverse Hackathon Delegation",
+    subtitle: "Qualcomm Developer Conference",
+    year: "2026",
+    image: "/achievements/achieve-6.jpeg",
+    tag: "Tech Conference",
+    description: "Participated among top developer teams nationwide building generative AI & IoT edge computing prototypes.",
+  },
+  {
+    id: "ach-pco-sense",
+    title: "PCO Sense Medical AI & Wearable Hardware",
+    subtitle: "Hardware & Health Tech",
+    year: "2025",
+    image: "/achievements/achieve-14.jpeg",
+    tag: "Medical AI Hardware",
+    description: "Developed smart health monitoring wearable band and pollution detection monitoring hardware.",
+  },
+  {
+    id: "ach-sih-2nd",
+    title: "Smart India Hackathon Internal Round (2nd Rank)",
+    subtitle: "VIPS SIH Internal Hackathon",
+    year: "2025",
+    image: "/achievements/achieve-9.jpeg",
+    tag: "SIH 2nd Rank",
+    description: "Secured 2nd Position in the Smart India Hackathon Internal Round at VIPS for presenting the Civic Complaint Management System.",
+  },
+  {
+    id: "ach-conference-pres",
+    title: "International Conference Research Presentation",
+    subtitle: "ICASW International Conference",
+    year: "2025",
+    image: "/achievements/achieve-1.jpg",
+    tag: "Research Paper",
+    description: "Presented research paper titled 'Green Materials: A Pathway to a Climate Resilient and Sustainable Future' at the International Conference (ICASW) organized by IIPA & VIPS.",
+  },
+  {
+    id: "ach-paper-cert",
+    title: "Research Paper Presentation Certificate",
+    subtitle: "IIPA & VIPS International Conference (ICASW)",
+    year: "2025",
+    image: "/achievements/achieve-15.jpeg",
+    tag: "Conference Certificate",
+    description: "Official Certificate of Presentation awarded for presenting research paper on Climate Action, AI, SDGs, and Water Management at the ICASW International Conference.",
   },
 ];
 

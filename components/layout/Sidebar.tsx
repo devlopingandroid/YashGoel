@@ -1,20 +1,26 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { navLinks, personalInfo } from "@/data/portfolio-data";
-import { Menu, X, FileDown, Terminal } from "lucide-react";
-import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram } from "react-icons/fa6";
+import { Menu, X, FileDown, Eye, Terminal } from "lucide-react";
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import Button from "@/components/ui/Button";
+import ResumeModal from "@/components/ui/ResumeModal";
 
-export const Sidebar: React.FC = () => {
+export const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+
       const sections = navLinks.map((link) => link.sectionId);
-      const scrollPosition = window.scrollY + 220;
+      const scrollPosition = window.scrollY + 140;
 
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
@@ -41,7 +47,7 @@ export const Sidebar: React.FC = () => {
     setMobileOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80;
+      const offset = 90;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -57,97 +63,203 @@ export const Sidebar: React.FC = () => {
 
   return (
     <>
-      {/* Mobile Top Header Navbar */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-dark-bg/95 backdrop-blur-md border-b border-dark-border z-50 px-4 flex items-center justify-between shadow-lg">
-        <a
-          href="#home"
-          onClick={(e) => handleNavClick(e, "home")}
-          className="flex items-center gap-2 group"
-        >
-          <div className="w-10 h-10 rounded-xl bg-dark-surface border border-accent-teal/40 flex items-center justify-center font-mono font-bold text-accent-teal text-lg shadow-teal-glow group-hover:scale-105 transition-transform">
-            YG
-          </div>
-          <span className="font-extrabold text-primary text-base tracking-tight">
-            Yash<span className="text-accent-teal">.</span>
-          </span>
-        </a>
+      {/* Top Sticky Header */}
+      <header
+        className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-dark-bg/90 backdrop-blur-xl border-b border-dark-border/80 shadow-2xl py-3"
+            : "bg-dark-bg/70 backdrop-blur-md border-b border-dark-border/40 py-4"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+          {/* Left Brand: Logo Image & Name */}
+          <a
+            href="#home"
+            onClick={(e) => handleNavClick(e, "home")}
+            className="flex items-center gap-3 group shrink-0"
+          >
+            <img
+              src="/logo.png"
+              alt="Yash Goel Logo"
+              className="h-9 sm:h-10 w-auto object-contain group-hover:scale-105 transition-transform"
+            />
+            <div>
+              <h1 className="font-extrabold text-base sm:text-lg text-primary leading-tight tracking-tight">
+                Yash <span className="text-accent-teal">Goel</span>
+              </h1>
+              <p className="text-[11px] font-mono text-muted flex items-center gap-1">
+                <Terminal className="w-3 h-3 text-accent-teal" /> Software Eng.
+              </p>
+            </div>
+          </a>
 
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="p-2.5 rounded-xl bg-dark-surface border border-dark-border text-primary hover:text-accent-teal focus:outline-none transition-colors"
-          aria-label="Toggle Navigation Menu"
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+          {/* Desktop Center Navigation Links */}
+          <nav className="hidden xl:flex items-center gap-1.5 bg-dark-surface/60 p-1.5 rounded-2xl border border-dark-border/60 backdrop-blur-md">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.sectionId;
+              return (
+                <a
+                  key={link.sectionId}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.sectionId)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-200 ${
+                    isActive
+                      ? "bg-accent-teal/20 text-accent-teal border border-accent-teal/40 font-bold shadow-sm"
+                      : "text-muted hover:text-primary hover:bg-dark-bg/50"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Right Action Buttons & Social Icons */}
+          <div className="hidden sm:flex items-center gap-3 shrink-0">
+            {/* Social Links */}
+            <div className="flex items-center gap-1.5 pr-2 border-r border-dark-border/60">
+              <a
+                href={personalInfo.socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-xl text-muted hover:text-accent-teal hover:bg-dark-surface border border-transparent hover:border-dark-border transition-all"
+                aria-label="GitHub"
+              >
+                <FaGithub className="w-4 h-4" />
+              </a>
+              <a
+                href={personalInfo.socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-xl text-muted hover:text-accent-teal hover:bg-dark-surface border border-transparent hover:border-dark-border transition-all"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="w-4 h-4" />
+              </a>
+              <a
+                href={personalInfo.socialLinks.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-xl text-muted hover:text-accent-teal hover:bg-dark-surface border border-transparent hover:border-dark-border transition-all"
+                aria-label="Twitter"
+              >
+                <FaXTwitter className="w-4 h-4" />
+              </a>
+            </div>
+
+            {/* Resume Buttons */}
+            <Button
+              onClick={() => setIsResumeModalOpen(true)}
+              variant="outline"
+              size="sm"
+              className="text-xs px-3 py-1.5"
+              icon={<Eye className="w-3.5 h-3.5" />}
+            >
+              Preview
+            </Button>
+
+            <Button
+              href={personalInfo.resumeUrl}
+              download="Yash_Goel.pdf"
+              target="_blank"
+              variant="primary"
+              size="sm"
+              className="text-xs px-3 py-1.5"
+              icon={<FileDown className="w-3.5 h-3.5" />}
+            >
+              Download
+            </Button>
+          </div>
+
+          {/* Mobile Hamburger Menu Button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="xl:hidden p-2.5 rounded-xl bg-dark-surface border border-dark-border text-primary hover:text-accent-teal focus:outline-none transition-colors"
+            aria-label="Toggle Navigation Menu"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </header>
 
-      {/* Mobile Navigation Drawer with AnimatePresence */}
+      {/* Mobile Sliding Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <>
-            {/* Backdrop Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
-              className="lg:hidden fixed inset-0 bg-dark-bg/80 backdrop-blur-sm z-40"
+              className="xl:hidden fixed inset-0 bg-dark-bg/80 backdrop-blur-md z-40"
             />
 
-            {/* Mobile Sliding Drawer */}
             <motion.aside
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
+              initial={{ y: "-100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "-100%", opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="lg:hidden fixed top-0 left-0 bottom-0 w-72 bg-dark-surface border-r border-dark-border z-50 flex flex-col justify-between p-6 pt-20 shadow-2xl"
+              className="xl:hidden fixed top-16 left-0 right-0 bg-dark-surface border-b border-dark-border z-50 p-6 shadow-2xl rounded-b-3xl"
             >
-              <div>
-                <nav className="space-y-1 overflow-y-auto max-h-[calc(100vh-260px)] pr-1">
-                  {navLinks.map((link) => {
-                    const isActive = activeSection === link.sectionId;
-                    return (
-                      <a
-                        key={link.sectionId}
-                        href={link.href}
-                        onClick={(e) => handleNavClick(e, link.sectionId)}
-                        className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${isActive
-                            ? "bg-accent-teal/15 text-accent-teal border border-accent-teal/30 font-semibold shadow-sm"
-                            : "text-muted hover:text-primary hover:bg-dark-bg/50"
-                          }`}
-                      >
-                        <span
-                          className={`w-1.5 h-1.5 rounded-full ${isActive
-                              ? "bg-accent-teal shadow-teal-glow"
-                              : "bg-dark-border"
-                            }`}
-                        />
-                        <span>{link.label}</span>
-                      </a>
-                    );
-                  })}
-                </nav>
-              </div>
+              <nav className="grid grid-cols-2 gap-2 mb-6">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.sectionId;
+                  return (
+                    <a
+                      key={link.sectionId}
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.sectionId)}
+                      className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl font-medium text-xs transition-all ${
+                        isActive
+                          ? "bg-accent-teal/20 text-accent-teal border border-accent-teal/40 font-bold"
+                          : "text-muted hover:text-primary hover:bg-dark-bg/50"
+                      }`}
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full ${
+                          isActive ? "bg-accent-teal shadow-teal-glow" : "bg-dark-border"
+                        }`}
+                      />
+                      <span>{link.label}</span>
+                    </a>
+                  );
+                })}
+              </nav>
 
-              {/* Bottom Actions & Social Icons */}
               <div className="pt-4 border-t border-dark-border space-y-4">
-                <Button
-                  href={personalInfo.resumeUrl}
-                  variant="outline"
-                  size="sm"
-                  className="w-full justify-center"
-                  icon={<FileDown className="w-4 h-4" />}
-                >
-                  Download Resume
-                </Button>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setIsResumeModalOpen(true);
+                    }}
+                    variant="outline"
+                    size="sm"
+                    className="w-full justify-center text-xs"
+                    icon={<Eye className="w-3.5 h-3.5" />}
+                  >
+                    Preview
+                  </Button>
 
-                <div className="flex items-center justify-center gap-3 pt-1 text-muted">
+                  <Button
+                    href={personalInfo.resumeUrl}
+                    download="Yash_Goel.pdf"
+                    target="_blank"
+                    variant="primary"
+                    size="sm"
+                    className="w-full justify-center text-xs"
+                    icon={<FileDown className="w-3.5 h-3.5" />}
+                  >
+                    Download
+                  </Button>
+                </div>
+
+                <div className="flex items-center justify-center gap-4 text-muted">
                   <a
                     href={personalInfo.socialLinks.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-dark-bg border border-dark-border hover:text-accent-teal hover:border-accent-teal/40 transition-colors"
-                    aria-label="GitHub Profile"
+                    className="p-2.5 rounded-xl bg-dark-bg border border-dark-border hover:text-accent-teal transition-colors"
                   >
                     <FaGithub className="w-4 h-4" />
                   </a>
@@ -155,8 +267,7 @@ export const Sidebar: React.FC = () => {
                     href={personalInfo.socialLinks.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-dark-bg border border-dark-border hover:text-accent-teal hover:border-accent-teal/40 transition-colors"
-                    aria-label="LinkedIn Profile"
+                    className="p-2.5 rounded-xl bg-dark-bg border border-dark-border hover:text-accent-teal transition-colors"
                   >
                     <FaLinkedin className="w-4 h-4" />
                   </a>
@@ -164,19 +275,9 @@ export const Sidebar: React.FC = () => {
                     href={personalInfo.socialLinks.twitter}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-dark-bg border border-dark-border hover:text-accent-teal hover:border-accent-teal/40 transition-colors"
-                    aria-label="Twitter Profile"
+                    className="p-2.5 rounded-xl bg-dark-bg border border-dark-border hover:text-accent-teal transition-colors"
                   >
                     <FaXTwitter className="w-4 h-4" />
-                  </a>
-                  <a
-                    href={personalInfo.socialLinks.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-dark-bg border border-dark-border hover:text-accent-teal hover:border-accent-teal/40 transition-colors"
-                    aria-label="Instagram Profile"
-                  >
-                    <FaInstagram className="w-4 h-4" />
                   </a>
                 </div>
               </div>
@@ -185,105 +286,13 @@ export const Sidebar: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Desktop Fixed Left Sidebar */}
-      <aside className="hidden lg:flex fixed top-0 left-0 bottom-0 w-64 bg-dark-surface border-r border-dark-border z-50 flex-col justify-between p-6">
-        <div>
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-11 h-11 rounded-2xl bg-dark-bg border border-accent-teal/40 flex items-center justify-center font-mono font-bold text-accent-teal text-xl shadow-teal-glow">
-              YG
-            </div>
-            <div>
-              <h1 className="font-extrabold text-lg text-primary leading-tight">
-                Yash <span className="text-accent-teal">Goel</span>
-              </h1>
-              <p className="text-xs font-mono text-muted flex items-center gap-1">
-                <Terminal className="w-3 h-3 text-accent-teal" /> Software Eng.
-              </p>
-            </div>
-          </div>
-
-          {/* Navigation Links */}
-          <nav className="space-y-1 overflow-y-auto max-h-[calc(100vh-280px)] pr-1 scrollbar-thin">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.sectionId;
-              return (
-                <a
-                  key={link.sectionId}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.sectionId)}
-                  className={`flex items-center gap-3 px-3.5 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 ${isActive
-                      ? "bg-accent-teal/15 text-accent-teal border border-accent-teal/30 font-semibold shadow-sm"
-                      : "text-muted hover:text-primary hover:bg-dark-bg/50"
-                    }`}
-                >
-                  <span
-                    className={`w-1.5 h-1.5 rounded-full ${isActive
-                        ? "bg-accent-teal shadow-teal-glow"
-                        : "bg-dark-border"
-                      }`}
-                  />
-                  <span>{link.label}</span>
-                </a>
-              );
-            })}
-          </nav>
-        </div>
-
-        {/* Bottom Pinned Actions & Social Links */}
-        <div className="pt-4 border-t border-dark-border space-y-4">
-          <Button
-            href={personalInfo.resumeUrl}
-            variant="outline"
-            size="sm"
-            className="w-full justify-center"
-            icon={<FileDown className="w-4 h-4" />}
-          >
-            Download Resume
-          </Button>
-
-          <div className="flex items-center justify-center gap-3 pt-1 text-muted">
-            <a
-              href={personalInfo.socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-dark-bg hover:text-accent-teal transition-colors"
-              aria-label="GitHub Profile"
-            >
-              <FaGithub className="w-4 h-4" />
-            </a>
-            <a
-              href={personalInfo.socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-dark-bg hover:text-accent-teal transition-colors"
-              aria-label="LinkedIn Profile"
-            >
-              <FaLinkedin className="w-4 h-4" />
-            </a>
-            <a
-              href={personalInfo.socialLinks.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-dark-bg hover:text-accent-teal transition-colors"
-              aria-label="Twitter Profile"
-            >
-              <FaXTwitter className="w-4 h-4" />
-            </a>
-            <a
-              href={personalInfo.socialLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-dark-bg hover:text-accent-teal transition-colors"
-              aria-label="Instagram Profile"
-            >
-              <FaInstagram className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
-      </aside>
+      <ResumeModal
+        isOpen={isResumeModalOpen}
+        onClose={() => setIsResumeModalOpen(false)}
+      />
     </>
   );
 };
 
-export default Sidebar;
+export default Navbar;
 

@@ -1,4 +1,4 @@
-import Sidebar from "@/components/layout/Sidebar";
+import Navbar from "@/components/layout/Sidebar";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -13,11 +13,11 @@ import Footer from "@/components/sections/Footer";
 export default function Home() {
   return (
     <div className="min-h-screen bg-dark-bg text-primary">
-      {/* Sidebar / Navbar Layout Component */}
-      <Sidebar />
+      {/* Sticky Top Navigation Header */}
+      <Navbar />
 
-      {/* Main Content Area (Offset by 64 (16rem) on desktop to clear fixed left sidebar) */}
-      <main className="lg:pl-64 pt-16 lg:pt-0 min-h-screen">
+      {/* Main Content Area */}
+      <main className="min-h-screen">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
           <Hero />
           <About />

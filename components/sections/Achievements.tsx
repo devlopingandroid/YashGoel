@@ -1,235 +1,207 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
-import { motion, PanInfo } from "framer-motion";
-import { achievementsData } from "@/data/portfolio-data";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { achievementsData, Achievement } from "@/data/portfolio-data";
 import SectionBadge from "@/components/ui/SectionBadge";
-import Card from "@/components/ui/Card";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Trophy,
-  ShieldCheck,
-  Award,
-  Medal,
-  Sparkles,
-} from "lucide-react";
-
-const getAchievementIcon = (iconName: string, isHero?: boolean) => {
-  const iconProps = {
-    className: `w-8 h-8 ${isHero ? "text-accent-teal" : "text-accent-teal/90"}`,
-  };
-
-  switch (iconName) {
-    case "Sparkles":
-      return <Sparkles {...iconProps} />;
-    case "ShieldCheck":
-      return <ShieldCheck {...iconProps} />;
-    case "Trophy":
-      return <Trophy {...iconProps} />;
-    case "Award":
-      return <Award {...iconProps} />;
-    case "Medal":
-      return <Medal {...iconProps} />;
-    default:
-      return <Trophy {...iconProps} />;
-  }
-};
+import { X, Sparkles, Trophy, Maximize2, Calendar } from "lucide-react";
 
 export const Achievements: React.FC = () => {
-  // Start with Google Gemini Ambassador (index 0) or middle item as active center
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
 
-  const total = achievementsData.length;
+  // Split achievements into 2 distinct rows for dual marquee
+  const halfLength = Math.ceil(achievementsData.length / 2);
+  const row1 = achievementsData.slice(0, halfLength);
+  const row2 = achievementsData.slice(halfLength);
 
+  // Duplicate arrays to ensure seamless infinite looping without white space
+  const marqueeRow1 = [...row1, ...row1, ...row1];
+  const marqueeRow2 = [...row2, ...row2, ...row2];
+
+  // Close modal on Escape key
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedAchievement(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
-
-  const handlePrev = useCallback(() => {
-    setActiveIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
-  }, [total]);
-
-  const handleNext = useCallback(() => {
-    setActiveIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
-  }, [total]);
-
-  // Handle Drag/Swipe End
-  const handleDragEnd = (_: unknown, info: PanInfo) => {
-    const swipeThreshold = 40;
-    if (info.offset.x < -swipeThreshold) {
-      handleNext();
-    } else if (info.offset.x > swipeThreshold) {
-      handlePrev();
-    }
-  };
-
-  // Autoplay functionality (slides every 4.5 seconds unless hovered)
-  useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(() => {
-      handleNext();
-    }, 4500);
-    return () => clearInterval(timer);
-  }, [isPaused, handleNext]);
 
   return (
     <section
       id="achievements"
       className="pt-4 md:pt-6 pb-12 md:pb-16 scroll-mt-4 md:scroll-mt-6 border-t border-dark-border/40 overflow-hidden"
     >
-      <SectionBadge title="Key Achievements" className="mb-6" />
+      <div className="flex items-center justify-between gap-4 mb-6">
+        <SectionBadge title="Key Achievements & Gallery" className="mb-0" />
+        <span className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-muted bg-dark-surface/80 px-3 py-1 rounded-full border border-dark-border">
+          <Sparkles className="w-3.5 h-3.5 text-accent-teal animate-pulse" />
+          Click any card to expand
+        </span>
+      </div>
 
-      {/* 3D Coverflow Carousel Container */}
-      <div
-        className="relative w-full max-w-5xl mx-auto min-h-[380px] flex items-center justify-center py-4 overflow-hidden touch-pan-y"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        {/* Left Navigation Arrow */}
-        <button
-          onClick={handlePrev}
-          className="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-dark-surface/90 border border-dark-border text-primary hover:border-accent-teal hover:text-accent-teal hover:shadow-teal-glow backdrop-blur-md transition-all z-40 shadow-xl"
-          aria-label="Previous Achievement"
-        >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
+      {/* Dual Row Marquee Container */}
+      <div className="relative w-full space-y-6 py-2 overflow-hidden">
+        {/* Row 1: Left to Right Marquee */}
+        <div className="relative w-full overflow-hidden group pause-on-hover">
+          {/* Gradient Edge Blurs */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-dark-bg to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-dark-bg to-transparent z-20 pointer-events-none" />
 
-        {/* Right Navigation Arrow */}
-        <button
-          onClick={handleNext}
-          className="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-dark-surface/90 border border-dark-border text-primary hover:border-accent-teal hover:text-accent-teal hover:shadow-teal-glow backdrop-blur-md transition-all z-40 shadow-xl"
-          aria-label="Next Achievement"
-        >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
+          <div className="flex gap-5 w-max animate-marquee-right">
+            {marqueeRow1.map((item, idx) => (
+              <AchievementPosterCard
+                key={`r1-${item.id}-${idx}`}
+                item={item}
+                onClick={() => setSelectedAchievement(item)}
+              />
+            ))}
+          </div>
+        </div>
 
-        {/* 3D Perspective Stage */}
-        <div
-          className="relative w-full h-[360px] flex items-center justify-center overflow-hidden"
-          style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
-        >
-          {achievementsData.map((item, index) => {
-            // Calculate distance offset relative to active center card
-            const offset = index - activeIndex;
-            const absOffset = Math.abs(offset);
+        {/* Row 2: Right to Left Marquee */}
+        <div className="relative w-full overflow-hidden group pause-on-hover">
+          {/* Gradient Edge Blurs */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-dark-bg to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-dark-bg to-transparent z-20 pointer-events-none" />
 
-            // Compute responsive 3D transformation values
-            const xStep = isMobile ? 110 : 220;
-            const xOffset = offset * xStep;
-            const scale = Math.max(0.65, 1 - absOffset * (isMobile ? 0.12 : 0.18));
-            const rotateY = offset < 0 ? 30 : offset > 0 ? -30 : 0;
-            const opacity = Math.max(0.15, 1 - absOffset * 0.4);
-            const zIndex = 20 - absOffset;
-            const isCenter = offset === 0;
-
-            return (
-              <motion.div
-                key={item.id}
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                onDragEnd={handleDragEnd}
-                animate={{
-                  x: xOffset,
-                  scale: scale,
-                  rotateY: rotateY,
-                  opacity: opacity,
-                  zIndex: zIndex,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 25,
-                }}
-                onClick={() => setActiveIndex(index)}
-                className={`absolute w-[270px] sm:w-[340px] cursor-pointer touch-pan-y ${
-                  isCenter ? "cursor-grab active:cursor-grabbing" : ""
-                }`}
-                style={{
-                  transformStyle: "preserve-3d",
-                }}
-              >
-                <Card
-                  className={`p-6 text-center flex flex-col items-center justify-between min-h-[340px] transition-colors duration-300 ${
-                    item.isHero
-                      ? "border-2 border-accent-teal/70 bg-gradient-to-b from-dark-surface via-dark-surface to-accent-teal/15 shadow-teal-glow"
-                      : isCenter
-                      ? "border-accent-teal/40 bg-dark-surface shadow-2xl"
-                      : "border-dark-border bg-dark-surface/80"
-                  }`}
-                >
-                  {/* Hero Badge Tag for Gemini Ambassador */}
-                  {item.isHero && (
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-accent-teal/20 text-accent-teal border border-accent-teal/40 mb-2">
-                      <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-                      <span>Featured Ambassador</span>
-                    </div>
-                  )}
-
-                  {/* Centered Achievement Badge Visual */}
-                  <div
-                    className={`w-20 h-20 rounded-3xl p-4 flex items-center justify-center my-3 transition-transform group-hover:scale-110 ${
-                      item.isHero
-                        ? "bg-accent-teal/20 border-2 border-accent-teal/60 shadow-teal-glow"
-                        : "bg-dark-bg border border-accent-teal/30"
-                    }`}
-                  >
-                    {getAchievementIcon(item.iconName, item.isHero)}
-                  </div>
-
-                  {/* Year Tag */}
-                  <span className="text-xs font-mono font-bold text-accent-teal bg-accent-teal/10 px-2.5 py-0.5 rounded-md border border-accent-teal/20 mb-2">
-                    {item.year}
-                  </span>
-
-                  {/* Title & Subtitle */}
-                  <div>
-                    <h3
-                      className={`text-lg font-extrabold tracking-tight mb-1 ${
-                        item.isHero ? "text-accent-teal" : "text-primary"
-                      }`}
-                    >
-                      {item.title}
-                    </h3>
-                    <p className="text-xs font-mono text-muted">
-                      {item.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Optional Short Description */}
-                  {item.description && (
-                    <p className="text-xs text-muted/80 leading-relaxed mt-3 line-clamp-2">
-                      {item.description}
-                    </p>
-                  )}
-                </Card>
-              </motion.div>
-            );
-          })}
+          <div className="flex gap-5 w-max animate-marquee-left">
+            {marqueeRow2.map((item, idx) => (
+              <AchievementPosterCard
+                key={`r2-${item.id}-${idx}`}
+                item={item}
+                onClick={() => setSelectedAchievement(item)}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Pagination Indicator Dots */}
-      <div className="flex items-center justify-center gap-2 mt-6">
-        {achievementsData.map((item, idx) => (
-          <button
-            key={item.id}
-            onClick={() => setActiveIndex(idx)}
-            className={`transition-all duration-300 rounded-full ${
-              activeIndex === idx
-                ? "w-8 h-2.5 bg-accent-teal shadow-teal-glow"
-                : "w-2.5 h-2.5 bg-dark-border hover:bg-muted"
-            }`}
-            aria-label={`Go to slide ${idx + 1}`}
-          />
-        ))}
-      </div>
+      {/* Click-to-Expand Image Modal */}
+      <AnimatePresence>
+        {selectedAchievement && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedAchievement(null)}
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-3xl rounded-3xl bg-gradient-to-b from-dark-surface to-dark-bg border-2 border-accent-teal/60 shadow-[0_0_50px_rgba(20,232,196,0.25)] overflow-hidden"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedAchievement(null)}
+                className="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-black/70 text-white hover:bg-accent-teal hover:text-dark-bg border border-white/20 transition-all"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Modal Image Header */}
+              <div className="relative w-full h-[280px] sm:h-[380px] overflow-hidden bg-black/50">
+                <img
+                  src={selectedAchievement.image}
+                  alt={selectedAchievement.title}
+                  className="w-full h-full object-contain sm:object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-transparent to-transparent" />
+
+                {/* Badge Tag on Image */}
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-accent-teal/20 text-accent-teal border border-accent-teal/40 backdrop-blur-md">
+                    {selectedAchievement.tag}
+                  </span>
+                  {selectedAchievement.isHero && (
+                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 backdrop-blur-md flex items-center gap-1">
+                      <Trophy className="w-3 h-3 text-amber-300" />
+                      Featured
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Modal Body Info */}
+              <div className="p-6 sm:p-8 space-y-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-mono text-accent-teal">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>{selectedAchievement.year}</span>
+                    <span>•</span>
+                    <span>{selectedAchievement.subtitle}</span>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-primary tracking-tight">
+                    {selectedAchievement.title}
+                  </h3>
+                </div>
+
+                <p className="text-sm sm:text-base text-muted leading-relaxed">
+                  {selectedAchievement.description}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
+  );
+};
+
+interface AchievementPosterCardProps {
+  item: Achievement;
+  onClick: () => void;
+}
+
+const AchievementPosterCard: React.FC<AchievementPosterCardProps> = ({ item, onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      className="group relative w-[280px] sm:w-[340px] h-[200px] sm:h-[230px] rounded-2xl overflow-hidden cursor-pointer bg-dark-surface/80 border border-dark-border hover:border-accent-teal/70 shadow-lg hover:shadow-[0_0_30px_rgba(20,232,196,0.3)] transition-all duration-300 hover:scale-[1.03] shrink-0"
+    >
+      {/* Background Poster Image */}
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+      />
+
+      {/* Dark Overlay Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/95 via-dark-bg/40 to-transparent transition-opacity group-hover:opacity-90" />
+
+      {/* Top Badge Tag */}
+      <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
+        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-dark-bg/80 text-accent-teal border border-accent-teal/30 backdrop-blur-md">
+          {item.tag}
+        </span>
+      </div>
+
+      {/* Expand Icon Indicator on Hover */}
+      <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-full bg-accent-teal text-dark-bg shadow-teal-glow">
+        <Maximize2 className="w-3.5 h-3.5" />
+      </div>
+
+      {/* Bottom Text Content */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 z-10 space-y-1">
+        <div className="flex items-center gap-2 text-[11px] font-mono text-accent-teal">
+          <span>{item.year}</span>
+          <span>•</span>
+          <span className="truncate">{item.subtitle}</span>
+        </div>
+
+        <h4 className="text-sm sm:text-base font-bold text-primary tracking-tight line-clamp-1 group-hover:text-accent-teal transition-colors">
+          {item.title}
+        </h4>
+      </div>
+    </div>
   );
 };
 

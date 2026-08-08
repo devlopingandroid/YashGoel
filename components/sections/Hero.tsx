@@ -135,29 +135,31 @@ export const Hero: React.FC = () => {
             <div className="absolute -inset-4 rounded-full border border-accent-teal/20 animate-spin-slow" />
 
             {/* Profile Image Container */}
-            <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-accent-teal/40 bg-dark-surface shadow-2xl group">
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/80 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-30 transition-opacity" />
-              <img
-                src={personalInfo.avatarUrl}
-                alt={personalInfo.name}
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                onError={(e) => {
-                  // Fallback visual if placeholder image file is missing
-                  e.currentTarget.style.display = "none";
-                  const fallbackDiv = e.currentTarget.parentElement?.querySelector(
-                    ".avatar-fallback"
-                  ) as HTMLElement;
-                  if (fallbackDiv) fallbackDiv.style.display = "flex";
-                }}
-              />
-              <div className="avatar-fallback hidden absolute inset-0 bg-dark-surface flex-col items-center justify-center text-center p-6 border border-dark-border">
-                <Code2 className="w-16 h-16 text-accent-teal mb-3" />
-                <span className="font-mono font-bold text-xl text-primary">
-                  {personalInfo.name}
-                </span>
-                <span className="text-xs text-muted font-mono mt-1">
-                  Profile Image Placeholder
-                </span>
+            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-accent-teal/40 bg-dark-surface shadow-2xl group p-2">
+              <div className="w-full h-full rounded-full overflow-hidden relative flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/60 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-30 transition-opacity" />
+                <img
+                  src={personalInfo.avatarUrl}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-contain object-center scale-110 group-hover:scale-115 transition-transform duration-500"
+                  onError={(e) => {
+                    // Fallback visual if placeholder image file is missing
+                    e.currentTarget.style.display = "none";
+                    const fallbackDiv = e.currentTarget.parentElement?.querySelector(
+                      ".avatar-fallback"
+                    ) as HTMLElement;
+                    if (fallbackDiv) fallbackDiv.style.display = "flex";
+                  }}
+                />
+                <div className="avatar-fallback hidden absolute inset-0 bg-dark-surface flex-col items-center justify-center text-center p-6 border border-dark-border rounded-full">
+                  <Code2 className="w-16 h-16 text-accent-teal mb-3" />
+                  <span className="font-mono font-bold text-xl text-primary">
+                    {personalInfo.name}
+                  </span>
+                  <span className="text-xs text-muted font-mono mt-1">
+                    Profile Image Placeholder
+                  </span>
+                </div>
               </div>
             </div>
 

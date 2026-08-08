@@ -1,9 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React from "react";
 import { personalInfo, footerData } from "@/data/portfolio-data";
 import { ArrowUp, Terminal } from "lucide-react";
-import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram } from "react-icons/fa6";
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -17,9 +18,7 @@ export const Footer: React.FC = () => {
         {/* Column 1: Logo, Taglines, & Social Icons */}
         <div className="sm:col-span-2 lg:col-span-1 space-y-4">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-dark-surface border border-accent-teal/40 flex items-center justify-center font-mono font-bold text-accent-teal text-xl shadow-teal-glow">
-              YG
-            </div>
+            <img src="/logo.png" alt="Yash Goel Logo" className="h-9 sm:h-10 w-auto object-contain" />
             <div>
               <h4 className="font-extrabold text-lg text-primary leading-tight">
                 Yash <span className="text-accent-teal">Goel</span>
@@ -68,15 +67,6 @@ export const Footer: React.FC = () => {
               aria-label="Twitter"
             >
               <FaXTwitter className="w-4 h-4" />
-            </a>
-            <a
-              href={personalInfo.socialLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-dark-surface border border-dark-border hover:border-accent-teal/40 hover:text-accent-teal transition-colors"
-              aria-label="Instagram"
-            >
-              <FaInstagram className="w-4 h-4" />
             </a>
           </div>
         </div>

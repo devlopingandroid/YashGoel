@@ -13,6 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://yashgoel.dev"),
   title: "Yash Goel | Software Engineer Portfolio",
   description: "Developer portfolio of Yash Goel - Software Engineer specializing in scalable full-stack applications, algorithms, and web solutions.",
 };

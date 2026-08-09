@@ -93,8 +93,8 @@ export const Navbar: React.FC = () => {
             </div>
           </a>
 
-          {/* Desktop Center Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1.5 bg-dark-surface/60 p-1.5 rounded-2xl border border-dark-border/60 backdrop-blur-md">
+          {/* Desktop Center Navigation Links with 3D Sliding Pill */}
+          <nav className="hidden xl:flex items-center gap-1 bg-dark-surface/80 p-1.5 rounded-2xl border border-dark-border/80 backdrop-blur-xl shadow-inner">
             {navLinks.map((link) => {
               const isActive = activeSection === link.sectionId;
               return (
@@ -102,13 +102,25 @@ export const Navbar: React.FC = () => {
                   key={link.sectionId}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.sectionId)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-200 ${
+                  className={`relative px-3.5 py-1.5 rounded-xl text-xs font-medium transition-colors duration-200 ${
                     isActive
-                      ? "bg-accent-teal/20 text-accent-teal border border-accent-teal/40 font-bold shadow-sm"
-                      : "text-muted hover:text-primary hover:bg-dark-bg/50"
+                      ? "text-accent-teal font-bold"
+                      : "text-muted hover:text-primary hover:bg-dark-bg/40"
                   }`}
                 >
-                  {link.label}
+                  {/* Sliding 3D Active Pill */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="navbarActivePill"
+                      className="absolute inset-0 bg-accent-teal/15 border border-accent-teal/50 rounded-xl shadow-[0_0_15px_rgba(20,232,196,0.25)]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
                 </a>
               );
             })}

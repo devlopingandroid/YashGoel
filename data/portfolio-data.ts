@@ -353,7 +353,6 @@ export const navLinks: NavLink[] = [
   { label: "Projects", href: "#projects", sectionId: "projects" },
   { label: "Achievements", href: "#achievements", sectionId: "achievements" },
   { label: "Gallery", href: "#gallery", sectionId: "gallery" },
-  { label: "Blogs", href: "#blogs", sectionId: "blogs" },
   { label: "Contact", href: "#contact", sectionId: "contact" },
 ];
 
@@ -453,7 +452,7 @@ export const projectsData: Project[] = [
     id: "proj-budget-eagle",
     title: "Budget Eagle",
     tag: "Full Stack",
-    description: "An AI-powered financial management and budget tracking application with automated expense categorization.",
+    description: "An AI-powered personal finance and wealth management platform built during my DRDO internship, centralizing expense tracking, budgets, and investments.",
     techBadges: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
     image: "/projects/budget-eagle.png",
     githubUrl: "https://github.com/budgeteagle/budget_eagle_web",
@@ -565,9 +564,9 @@ export const projectsData: Project[] = [
   {
     id: "proj-streamify",
     title: "Streamify",
-    tag: "Web Application",
-    description: "High-performance video streaming platform featuring real-time chat, adaptive bitrate, and custom video analytics.",
-    techBadges: ["Next.js", "TypeScript", "Tailwind", "WebSockets", "AWS S3"],
+    tag: "Full Stack Streaming",
+    description: "A full-stack media streaming and content management platform featuring secure JWT authentication, modular REST APIs, and responsive cross-device experiences.",
+    techBadges: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
     image: "/projects/streamify.png",
     githubUrl: "https://github.com/devlopingandroid/Streamiify",
     liveUrl: "https://streamiify-psi.vercel.app/landing",
@@ -576,12 +575,12 @@ export const projectsData: Project[] = [
   {
     id: "proj-skillforge",
     title: "SkillForge",
-    tag: "AI + Coding Platform",
-    description: "AI-powered interactive coding platform featuring intelligent code evaluation, personalized learning paths, and real-time execution.",
-    techBadges: ["Next.js", "TypeScript", "Tailwind", "Python", "AI/ML"],
+    tag: "AI Career Prep",
+    description: "An AI-powered career preparation platform that analyzes resumes, identifies skill gaps, and generates company-specific coding practice.",
+    techBadges: ["Next.js", "TypeScript", "Tailwind", "Supabase", "AI Pipeline"],
     image: "/projects/skillforge.png",
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    githubUrl: "https://github.com/devlopingandroid/SkillForge-AI",
+    liveUrl: "https://drive.google.com/file/d/16XBSGHRMePketYUAwlzTM_qGO98CUzCW/view?usp=drive_link",
     featured: true,
   },
 ];

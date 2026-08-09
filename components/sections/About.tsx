@@ -15,7 +15,6 @@ import {
   Code2,
   Trophy,
   Sparkles,
-  FileCode,
   CheckCircle2,
 } from "lucide-react";
 

@@ -183,16 +183,6 @@ export interface Certificate {
   credentialUrl?: string;
 }
 
-export interface Achievement {
-  id: string;
-  title: string;
-  subtitle: string;
-  year: string;
-  iconName: string;
-  isHero?: boolean;
-  description?: string;
-}
-
 export interface HackathonItem {
   id: string;
   name: string;
@@ -465,7 +455,7 @@ export const projectsData: Project[] = [
     tag: "Full Stack",
     description: "An AI-powered financial management and budget tracking application with automated expense categorization.",
     techBadges: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
-    image: "/projects/budget-eagle.jpg",
+    image: "/projects/budget-eagle.png",
     githubUrl: "https://github.com/budgeteagle/budget_eagle_web",
     liveUrl: "https://budgeteagle.in/",
     featured: true,
@@ -578,7 +568,7 @@ export const projectsData: Project[] = [
     tag: "Web Application",
     description: "High-performance video streaming platform featuring real-time chat, adaptive bitrate, and custom video analytics.",
     techBadges: ["Next.js", "TypeScript", "Tailwind", "WebSockets", "AWS S3"],
-    image: "/projects/streamify.jpg",
+    image: "/projects/streamify.png",
     githubUrl: "https://github.com/devlopingandroid/Streamiify",
     liveUrl: "https://streamiify-psi.vercel.app/landing",
     featured: true,
@@ -589,7 +579,7 @@ export const projectsData: Project[] = [
     tag: "AI + Coding Platform",
     description: "AI-powered interactive coding platform featuring intelligent code evaluation, personalized learning paths, and real-time execution.",
     techBadges: ["Next.js", "TypeScript", "Tailwind", "Python", "AI/ML"],
-    image: "/projects/skillforge.jpg",
+    image: "/projects/skillforge.png",
     githubUrl: "https://github.com",
     liveUrl: "https://example.com",
     featured: true,

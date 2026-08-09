@@ -9,33 +9,42 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  ArrowRight,
+  ChevronDown,
+  ChevronUp,
   Camera,
   Maximize2,
+  Sparkles,
 } from "lucide-react";
 
 const galleryCategories = [
   "All",
-  "Certificates",
+  "Publications",
   "Internship",
+  "Certificates",
   "Hackathons",
-  "Travel",
   "Campus",
   "Events",
-  "Others",
 ] as const;
 
 type GalleryFilter = (typeof galleryCategories)[number];
 
+const ITEMS_PER_TAB = 5;
+
 export const Gallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<GalleryFilter>("All");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState<boolean>(false);
 
   // Filter gallery array based on active tab
   const filteredGallery = galleryData.filter((item) => {
     if (activeCategory === "All") return true;
     return item.category === activeCategory;
   });
+
+  // Limit displayed items to 5 initially unless "View More" is toggled
+  const displayedGallery = showAll
+    ? filteredGallery
+    : filteredGallery.slice(0, ITEMS_PER_TAB);
 
   const selectedItem =
     selectedIndex !== null ? filteredGallery[selectedIndex] : null;
@@ -71,26 +80,48 @@ export const Gallery: React.FC = () => {
       id="gallery"
       className="pt-4 md:pt-6 pb-12 md:pb-16 scroll-mt-4 md:scroll-mt-6 border-t border-dark-border/40"
     >
-      <SectionBadge title="Photo Gallery" className="mb-6" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <SectionBadge title="Photo Gallery & Publications" />
+        <span className="text-xs font-mono text-muted flex items-center gap-1.5 self-start sm:self-auto">
+          <Sparkles className="w-3.5 h-3.5 text-accent-teal" />
+          <span>
+            Showing {displayedGallery.length} of {filteredGallery.length} in {activeCategory}
+          </span>
+        </span>
+      </div>
 
       {/* Top Filter Tabs */}
       <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 scrollbar-thin">
         {galleryCategories.map((cat) => {
           const isActive = activeCategory === cat;
+          const count = galleryData.filter((item) =>
+            cat === "All" ? true : item.category === cat
+          ).length;
+
           return (
             <button
               key={cat}
               onClick={() => {
                 setActiveCategory(cat);
                 setSelectedIndex(null);
+                setShowAll(false);
               }}
-              className={`px-3.5 py-1.5 text-xs font-mono font-medium rounded-lg whitespace-nowrap transition-all border ${
+              className={`px-3.5 py-1.5 text-xs font-mono font-medium rounded-lg whitespace-nowrap transition-all border flex items-center gap-1.5 ${
                 isActive
                   ? "bg-accent-teal text-dark-bg font-bold border-accent-teal shadow-sm"
                   : "bg-dark-surface/90 text-muted border-dark-border hover:text-primary hover:border-accent-teal/40"
               }`}
             >
-              {cat}
+              <span>{cat}</span>
+              <span
+                className={`text-[10px] px-1.5 py-0.2 rounded-md ${
+                  isActive
+                    ? "bg-dark-bg/20 text-dark-bg font-extrabold"
+                    : "bg-dark-bg text-muted/80"
+                }`}
+              >
+                {count}
+              </span>
             </button>
           );
         })}
@@ -102,79 +133,97 @@ export const Gallery: React.FC = () => {
         className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[220px]"
       >
         <AnimatePresence>
-          {filteredGallery.map((item, index) => (
-            <motion.div
-              key={item.id}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setSelectedIndex(index)}
-              className={`relative rounded-2xl overflow-hidden bg-dark-surface border border-dark-border hover:border-accent-teal/50 hover:shadow-teal-glow transition-all duration-300 group cursor-pointer min-h-[220px] ${
-                item.spanClass || "col-span-1 row-span-1"
-              }`}
-            >
-              {/* Image */}
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                  const fallback = e.currentTarget.parentElement?.querySelector(
-                    ".gallery-image-fallback"
-                  ) as HTMLElement;
-                  if (fallback) fallback.style.display = "flex";
-                }}
-              />
+          {displayedGallery.map((item) => {
+            // Find global index in filteredGallery for full lightbox navigation
+            const realIndex = filteredGallery.findIndex((g) => g.id === item.id);
 
-              {/* Image Fallback */}
-              <div className="gallery-image-fallback hidden absolute inset-0 bg-gradient-to-br from-dark-surface via-dark-bg to-accent-teal/10 flex-col items-center justify-center p-4 text-center border border-dark-border">
-                <Camera className="w-10 h-10 text-accent-teal mb-2" />
-                <span className="font-mono text-xs font-bold text-primary">
-                  {item.title}
-                </span>
-                <span className="text-[10px] text-muted font-mono mt-1">
-                  {item.category}
-                </span>
-              </div>
+            return (
+              <motion.div
+                key={item.id}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setSelectedIndex(realIndex)}
+                className={`relative rounded-2xl overflow-hidden bg-dark-surface border border-dark-border hover:border-accent-teal/50 hover:shadow-teal-glow transition-all duration-300 group cursor-pointer min-h-[220px] ${
+                  item.spanClass || "col-span-1 row-span-1"
+                }`}
+              >
+                {/* Image */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                    const fallback = e.currentTarget.parentElement?.querySelector(
+                      ".gallery-image-fallback"
+                    ) as HTMLElement;
+                    if (fallback) fallback.style.display = "flex";
+                  }}
+                />
 
-              {/* Overlaid Bottom Gradient & Hover Captions */}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-between p-4 z-10">
-                <div className="flex justify-between items-start">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-dark-bg/80 text-accent-teal border border-accent-teal/30">
+                {/* Image Fallback */}
+                <div className="gallery-image-fallback hidden absolute inset-0 bg-gradient-to-br from-dark-surface via-dark-bg to-accent-teal/10 flex-col items-center justify-center p-4 text-center border border-dark-border">
+                  <Camera className="w-10 h-10 text-accent-teal mb-2" />
+                  <span className="font-mono text-xs font-bold text-primary">
+                    {item.title}
+                  </span>
+                  <span className="text-[10px] text-muted font-mono mt-1">
                     {item.category}
                   </span>
-                  <div className="p-1.5 rounded-lg bg-dark-bg/70 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Maximize2 className="w-3.5 h-3.5" />
-                  </div>
                 </div>
 
-                <div>
-                  <h4 className="text-sm sm:text-base font-bold text-primary group-hover:text-accent-teal transition-colors leading-tight">
-                    {item.title}
-                  </h4>
-                  <p className="text-xs text-muted/90 line-clamp-1 mt-0.5 font-sans">
-                    {item.caption}
-                  </p>
+                {/* Overlaid Bottom Gradient & Hover Captions */}
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-between p-4 z-10">
+                  <div className="flex justify-between items-start">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-dark-bg/85 text-accent-teal border border-accent-teal/30">
+                      {item.category}
+                    </span>
+                    <div className="p-1.5 rounded-lg bg-dark-bg/70 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Maximize2 className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm sm:text-base font-bold text-primary group-hover:text-accent-teal transition-colors leading-tight">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs text-muted/90 line-clamp-1 mt-0.5 font-sans">
+                      {item.caption}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </AnimatePresence>
       </motion.div>
 
-      {/* Centered "View Full Gallery ->" Button */}
-      <div className="mt-12 text-center">
-        <a
-          href="#gallery"
-          className="inline-flex items-center gap-2 font-mono text-xs sm:text-sm font-semibold text-accent-teal hover:text-accent-teal-hover transition-colors group"
-        >
-          <span>View Full Gallery</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </a>
-      </div>
+      {/* Expandable "View More" / "Show Less" Button */}
+      {filteredGallery.length > ITEMS_PER_TAB && (
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => setShowAll((prev) => !prev)}
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-dark-surface/90 hover:bg-accent-teal/15 text-accent-teal border border-dark-border hover:border-accent-teal/50 font-mono text-xs sm:text-sm font-semibold transition-all duration-300 shadow-lg group hover:scale-[1.02]"
+          >
+            {showAll ? (
+              <>
+                <span>Show Less (Collapse)</span>
+                <ChevronUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
+              </>
+            ) : (
+              <>
+                <span>
+                  View All {filteredGallery.length} Items (+{filteredGallery.length - ITEMS_PER_TAB} More)
+                </span>
+                <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+              </>
+            )}
+          </button>
+        </div>
+      )}
 
       {/* Lightbox Modal with Prev/Next Navigation */}
       <AnimatePresence>
@@ -186,7 +235,7 @@ export const Gallery: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedIndex(null)}
-              className="absolute inset-0 bg-dark-bg/95 backdrop-blur-md"
+              className="absolute inset-0 bg-dark-bg/90 backdrop-blur-md"
             />
 
             {/* Previous Photo Arrow */}

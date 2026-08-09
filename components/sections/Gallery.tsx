@@ -21,8 +21,6 @@ const galleryCategories = [
   "Publications",
   "Internship",
   "Certificates",
-  "Hackathons",
-  "Campus",
   "Events",
 ] as const;
 

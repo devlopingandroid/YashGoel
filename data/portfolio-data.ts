@@ -326,10 +326,10 @@ export const personalInfo: PersonalInfo = {
   lastName: "Goel",
   role: "Software Engineer",
   greeting: "Hi, I'm",
-  tagline: "Passionate about building scalable web applications, sleek user experiences, and high-performance algorithms.",
+  tagline: "Software Engineer focused on Full-Stack Development, AI-powered products, and scalable digital experiences. Passionate about building impactful solutions across Finance, Streaming, Mobility, and Intelligent Systems.",
   avatarUrl: "/profile.png",
   resumeUrl: "/Yash_Goel.pdf",
-  email: "yashgoel.dev@gmail.com",
+  email: "yashgoel15119@gmail.com",
   phone: "+91 98765 43210",
   location: "Delhi, India",
   socialLinks: {

@@ -15,6 +15,7 @@ import {
   Copy,
   Check,
   Mail,
+  RefreshCw,
 } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
@@ -51,7 +52,7 @@ export const Contact: React.FC = () => {
     if (errorMessage) setErrorMessage("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Client-side validation
@@ -77,13 +78,38 @@ export const Contact: React.FC = () => {
       return;
     }
 
-    // Simulate form submission
     setIsSubmitting(true);
-    setTimeout(() => {
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if ((response.status === 200 || response.status === 201) && data?.success === true) {
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setErrorMessage("");
+      } else {
+        const errorReason =
+          data?.error || `Server responded with status code ${response.status}. Please try emailing directly.`;
+        setErrorMessage(errorReason);
+      }
+    } catch (err: unknown) {
+      const errorMsg =
+        err instanceof Error
+          ? err.message
+          : "Network error occurred while delivering email. You can also contact directly via " + personalInfo.email;
+      setErrorMessage(errorMsg);
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 800);
+    }
   };
 
   const socialCards = [
@@ -118,7 +144,7 @@ export const Contact: React.FC = () => {
       <SectionBadge title="Get In Touch" className="mb-6" />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Unique Interactive Social Gateway (~45% width) */}
+        {/* Left Column: Social Gateway & Direct Info (~45% width) */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -141,7 +167,7 @@ export const Contact: React.FC = () => {
             </p>
           </div>
 
-          {/* Interactive Social Cards Grid (2x2) */}
+          {/* Interactive Social Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
             {socialCards.map((card) => (
               <a
@@ -174,7 +200,7 @@ export const Contact: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-xs font-mono text-accent-teal font-semibold">
                 <Mail className="w-4 h-4" />
-                <span>Direct Email</span>
+                <span>Direct Email Address</span>
               </div>
               <button
                 onClick={handleCopyEmail}
@@ -234,7 +260,10 @@ export const Contact: React.FC = () => {
                   </p>
 
                   <Button
-                    onClick={() => setIsSubmitted(false)}
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setErrorMessage("");
+                    }}
                     variant="outline"
                     size="md"
                     className="mt-4"
@@ -252,11 +281,14 @@ export const Contact: React.FC = () => {
                     </h4>
                   </div>
 
-                  {/* Inline Error Toast */}
+                  {/* Inline Error Banner */}
                   {errorMessage && (
-                    <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-medium flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
-                      <span>{errorMessage}</span>
+                    <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-medium flex items-start gap-2.5">
+                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                      <div className="space-y-1">
+                        <p className="font-semibold">Delivery Notice:</p>
+                        <p className="text-[12px] leading-relaxed text-red-300">{errorMessage}</p>
+                      </div>
                     </div>
                   )}
 
@@ -269,10 +301,11 @@ export const Contact: React.FC = () => {
                       <input
                         type="text"
                         name="name"
+                        disabled={isSubmitting}
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="John Doe"
-                        className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-3 text-sm text-primary placeholder:text-muted/50 focus:outline-none focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/50 transition-all"
+                        className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-3 text-sm text-primary placeholder:text-muted/50 focus:outline-none focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/50 transition-all disabled:opacity-50"
                       />
                     </div>
 
@@ -283,10 +316,11 @@ export const Contact: React.FC = () => {
                       <input
                         type="email"
                         name="email"
+                        disabled={isSubmitting}
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="john@example.com"
-                        className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-3 text-sm text-primary placeholder:text-muted/50 focus:outline-none focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/50 transition-all"
+                        className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-3 text-sm text-primary placeholder:text-muted/50 focus:outline-none focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/50 transition-all disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -299,10 +333,11 @@ export const Contact: React.FC = () => {
                     <input
                       type="text"
                       name="subject"
+                      disabled={isSubmitting}
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="Project Opportunity / Collaboration / Hello"
-                      className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-3 text-sm text-primary placeholder:text-muted/50 focus:outline-none focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/50 transition-all"
+                      className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-3 text-sm text-primary placeholder:text-muted/50 focus:outline-none focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/50 transition-all disabled:opacity-50"
                     />
                   </div>
 
@@ -314,23 +349,30 @@ export const Contact: React.FC = () => {
                     <textarea
                       name="message"
                       rows={5}
+                      disabled={isSubmitting}
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Hi Yash, I'd like to discuss a project..."
-                      className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-3 text-sm text-primary placeholder:text-muted/50 focus:outline-none focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/50 transition-all resize-none"
+                      className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-3 text-sm text-primary placeholder:text-muted/50 focus:outline-none focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/50 transition-all resize-none disabled:opacity-50"
                     />
                   </div>
 
-                  {/* Full Width Submit Button */}
+                  {/* Full Width Submit Button with Loading State */}
                   <Button
                     type="submit"
                     variant="primary"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full justify-center text-base py-3.5 mt-2"
-                    icon={<Send className="w-4 h-4" />}
+                    className="w-full justify-center text-base py-3.5 mt-2 font-bold"
+                    icon={
+                      isSubmitting ? (
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Send className="w-4 h-4" />
+                      )
+                    }
                   >
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {isSubmitting ? "Sending Message..." : "Send Message"}
                   </Button>
                 </form>
               )}

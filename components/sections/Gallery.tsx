@@ -26,7 +26,7 @@ const galleryCategories = [
 
 type GalleryFilter = (typeof galleryCategories)[number];
 
-const ITEMS_PER_TAB = 5;
+const ITEMS_PER_TAB = 4;
 
 export const Gallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<GalleryFilter>("All");
@@ -39,7 +39,7 @@ export const Gallery: React.FC = () => {
     return item.category === activeCategory;
   });
 
-  // Limit displayed items to 5 initially unless "View More" is toggled
+  // Limit displayed items to 4 initially unless "View More" is toggled
   const displayedGallery = showAll
     ? filteredGallery
     : filteredGallery.slice(0, ITEMS_PER_TAB);

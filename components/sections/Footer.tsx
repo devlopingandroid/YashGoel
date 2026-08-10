@@ -5,6 +5,7 @@ import React from "react";
 import { personalInfo, footerData } from "@/data/portfolio-data";
 import { ArrowUp, Terminal } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { SiLeetcode } from "react-icons/si";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -59,6 +60,17 @@ export const Footer: React.FC = () => {
             >
               <FaLinkedin className="w-4 h-4" />
             </a>
+            {personalInfo.socialLinks.leetcode && (
+              <a
+                href={personalInfo.socialLinks.leetcode}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl bg-dark-surface border border-dark-border hover:border-[#FFA116]/40 hover:text-[#FFA116] transition-colors"
+                aria-label="LeetCode"
+              >
+                <SiLeetcode className="w-4 h-4" />
+              </a>
+            )}
             <a
               href={personalInfo.socialLinks.twitter}
               target="_blank"

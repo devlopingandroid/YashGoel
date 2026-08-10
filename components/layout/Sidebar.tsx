@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { navLinks, personalInfo } from "@/data/portfolio-data";
 import { Menu, X, FileDown, Eye, Terminal } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { SiLeetcode } from "react-icons/si";
 import Button from "@/components/ui/Button";
 import ResumeModal from "@/components/ui/ResumeModal";
 
@@ -148,6 +149,17 @@ export const Navbar: React.FC = () => {
               >
                 <FaLinkedin className="w-4 h-4" />
               </a>
+              {personalInfo.socialLinks.leetcode && (
+                <a
+                  href={personalInfo.socialLinks.leetcode}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-xl text-muted hover:text-[#FFA116] hover:bg-dark-surface border border-transparent hover:border-dark-border transition-all"
+                  aria-label="LeetCode"
+                >
+                  <SiLeetcode className="w-4 h-4" />
+                </a>
+              )}
               <a
                 href={personalInfo.socialLinks.twitter}
                 target="_blank"
@@ -283,6 +295,17 @@ export const Navbar: React.FC = () => {
                   >
                     <FaLinkedin className="w-4 h-4" />
                   </a>
+                  {personalInfo.socialLinks.leetcode && (
+                    <a
+                      href={personalInfo.socialLinks.leetcode}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2.5 rounded-xl bg-dark-bg border border-dark-border hover:text-[#FFA116] transition-colors"
+                      aria-label="LeetCode"
+                    >
+                      <SiLeetcode className="w-4 h-4" />
+                    </a>
+                  )}
                   <a
                     href={personalInfo.socialLinks.twitter}
                     target="_blank"

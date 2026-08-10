@@ -28,6 +28,10 @@ export default function Home() {
           </Section3DWrapper>
 
           <Section3DWrapper>
+            <Achievements />
+          </Section3DWrapper>
+
+          <Section3DWrapper>
             <Skills />
           </Section3DWrapper>
 
@@ -37,10 +41,6 @@ export default function Home() {
 
           <Section3DWrapper>
             <Projects />
-          </Section3DWrapper>
-
-          <Section3DWrapper>
-            <Achievements />
           </Section3DWrapper>
 
           <Section3DWrapper>

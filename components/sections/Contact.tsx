@@ -18,6 +18,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { SiLeetcode } from "react-icons/si";
 
 interface FormState {
   name: string;
@@ -128,6 +129,14 @@ export const Contact: React.FC = () => {
       url: personalInfo.socialLinks.linkedin,
       icon: <FaLinkedin className="w-5 h-5 text-[#0A66C2]" />,
       badgeColor: "border-[#0A66C2]/30 hover:border-[#0A66C2]/60",
+    },
+    {
+      id: "leetcode",
+      name: "LeetCode",
+      handle: "yashgoel01",
+      url: personalInfo.socialLinks.leetcode || "https://leetcode.com/u/yashgoel01/",
+      icon: <SiLeetcode className="w-5 h-5 text-[#FFA116]" />,
+      badgeColor: "border-[#FFA116]/30 hover:border-[#FFA116]/60",
     },
     {
       id: "twitter",

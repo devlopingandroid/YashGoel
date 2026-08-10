@@ -14,6 +14,7 @@ export interface PersonalInfo {
     github: string;
     linkedin: string;
     twitter: string;
+    leetcode?: string;
     instagram?: string;
   };
 }
@@ -292,6 +293,7 @@ export const footerData = {
         { label: "Contact", href: "#contact" },
         { label: "GitHub", href: "https://github.com/devlopingandroid" },
         { label: "LinkedIn", href: "https://www.linkedin.com/in/yash-goelcs/" },
+        { label: "LeetCode", href: "https://leetcode.com/u/yashgoel01/" },
         { label: "Twitter / X", href: "https://x.com/yashbuilds_" },
       ],
     },
@@ -326,7 +328,7 @@ export const personalInfo: PersonalInfo = {
   lastName: "Goel",
   role: "Software Engineer",
   greeting: "Hi, I'm",
-  tagline: "Software Engineer focused on Full-Stack Development, AI-powered products, and scalable digital experiences. Passionate about building impactful solutions across Finance, Streaming, Mobility, and Intelligent Systems.",
+  tagline: "",
   avatarUrl: "/profile.png",
   resumeUrl: "/Yash_Goel.pdf",
   email: "yashgoel15119@gmail.com",
@@ -336,6 +338,7 @@ export const personalInfo: PersonalInfo = {
     github: "https://github.com/devlopingandroid",
     linkedin: "https://www.linkedin.com/in/yash-goelcs/",
     twitter: "https://x.com/yashbuilds_",
+    leetcode: "https://leetcode.com/u/yashgoel01/",
   },
 };
 
@@ -348,10 +351,10 @@ export const heroStats: StatItem[] = [
 export const navLinks: NavLink[] = [
   { label: "Home", href: "#home", sectionId: "home" },
   { label: "About", href: "#about", sectionId: "about" },
+  { label: "Achievements", href: "#achievements", sectionId: "achievements" },
   { label: "Skills", href: "#skills", sectionId: "skills" },
   { label: "Experience", href: "#experience", sectionId: "experience" },
   { label: "Projects", href: "#projects", sectionId: "projects" },
-  { label: "Achievements", href: "#achievements", sectionId: "achievements" },
   { label: "Gallery", href: "#gallery", sectionId: "gallery" },
   { label: "Contact", href: "#contact", sectionId: "contact" },
 ];

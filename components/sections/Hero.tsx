@@ -151,15 +151,17 @@ export const Hero: React.FC = () => {
           </h1>
 
           {/* Role Subtitle */}
-          <h2 className="text-xl sm:text-2xl font-mono font-semibold text-accent-teal/90 mb-4 flex items-center gap-2">
+          <h2 className="text-xl sm:text-2xl font-mono font-semibold text-accent-teal/90 mb-6 flex items-center gap-2">
             <Terminal className="w-5 h-5 text-accent-teal inline" />
             <span>{personalInfo.role}</span>
           </h2>
 
           {/* Personal & Engineering-focused Description */}
-          <p className="text-base sm:text-lg text-muted max-w-xl mb-8 leading-relaxed">
-            {personalInfo.tagline}
-          </p>
+          {personalInfo.tagline && (
+            <p className="text-base sm:text-lg text-muted max-w-xl mb-8 leading-relaxed">
+              {personalInfo.tagline}
+            </p>
+          )}
 
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center gap-4 mb-12">

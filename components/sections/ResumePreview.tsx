@@ -75,7 +75,7 @@ export const ResumePreview: React.FC = () => {
                 Summary
               </h4>
               <p className="text-slate-700 text-xs leading-relaxed">
-                Software Engineer with expertise in React, Next.js, Node.js, and Machine Learning algorithms. Proven track record in research internships, hackathon victories, and patent publications.
+                Software Engineer specializing in Full-Stack Systems (Java, Spring Boot, React, Node.js) and AI pipelines with 3 research internships, 3 patents, and hackathon wins.
               </p>
             </div>
 
@@ -88,20 +88,20 @@ export const ResumePreview: React.FC = () => {
               <div className="space-y-2">
                 <div>
                   <div className="flex justify-between font-semibold text-slate-900 text-xs">
-                    <span>Infosys Springboard — Software Engineering Intern</span>
-                    <span className="font-mono text-[11px] text-slate-500">2024 - Present</span>
+                    <span>Infosys Springboard — SDE Intern</span>
+                    <span className="font-mono text-[11px] text-slate-500">2024</span>
                   </div>
                   <p className="text-[11px] text-slate-600">
-                    Engineered full-stack web applications using Java, React, and REST microservices.
+                    Built Civic Complaint Platform in Angular & Spring Boot with JWT role access.
                   </p>
                 </div>
                 <div>
                   <div className="flex justify-between font-semibold text-slate-900 text-xs">
-                    <span>DRDO SSPL — Research Intern</span>
-                    <span className="font-mono text-[11px] text-slate-500">2023 - 2024</span>
+                    <span>DRDO SSPL — Software Intern</span>
+                    <span className="font-mono text-[11px] text-slate-500">2024</span>
                   </div>
                   <p className="text-[11px] text-slate-600">
-                    Engineered computer vision signal processing pipelines in Python & C++.
+                    Developed Budget Management microservices in Java & Spring Boot.
                   </p>
                 </div>
               </div>

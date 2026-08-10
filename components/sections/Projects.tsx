@@ -4,6 +4,7 @@
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { projectsData, Project } from "@/data/portfolio-data";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Button from "@/components/ui/Button";
@@ -28,6 +29,7 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
   project,
   index,
 }) => {
+  const router = useRouter();
   const cardRef = useRef<HTMLDivElement>(null);
   const slug = getProjectSlug(project.id, project.title);
   const caseStudyUrl = `/projects/${slug}`;
@@ -68,6 +70,12 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
     setMousePos((prev) => ({ ...prev, active: false }));
   };
 
+  const handleCaseStudyClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    router.push(caseStudyUrl);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 25 }}
@@ -90,7 +98,7 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
         {/* Dynamic Interactive Cursor Spotlight Glare */}
         {mousePos.active && (
           <div
-            className="pointer-events-none absolute -inset-px rounded-2xl opacity-100 transition-opacity duration-300 z-30"
+            className="pointer-events-none absolute -inset-px rounded-2xl opacity-100 transition-opacity duration-300 z-10"
             style={{
               background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(45, 212, 191, 0.12), transparent 70%)`,
             }}
@@ -98,9 +106,9 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
         )}
 
         {/* Ambient Top Edge Highlight */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent-teal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent-teal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col flex-1">
+        <div className="relative z-20 flex flex-col flex-1">
           {/* Browser-Mockup Header Bar */}
           <div className="bg-dark-bg/95 px-4 py-2.5 border-b border-dark-border/70 flex items-center justify-between">
             {/* 3 Window Control Dots */}
@@ -120,8 +128,8 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
           {/* Browser Screenshot Area - Clickable to Case Study with 3D Depth */}
           <Link
             href={caseStudyUrl}
-            className="block relative aspect-video bg-dark-bg overflow-hidden border-b border-dark-border/70 group-hover:opacity-95 transition-opacity"
-            style={{ transform: "translateZ(12px)" }}
+            onClick={handleCaseStudyClick}
+            className="block relative aspect-video bg-dark-bg overflow-hidden border-b border-dark-border/70 group-hover:opacity-95 transition-opacity cursor-pointer z-20"
           >
             {/* Category Tag Pill Top-Right */}
             <div className="absolute top-3 right-3 z-20 px-2.5 py-1 text-[11px] font-mono font-semibold bg-dark-surface/90 text-accent-teal border border-accent-teal/30 rounded-lg backdrop-blur-md shadow-md flex items-center gap-1.5">
@@ -159,7 +167,11 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
           {/* Card Content Body */}
           <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
             <div>
-              <Link href={caseStudyUrl} className="block group/title">
+              <Link
+                href={caseStudyUrl}
+                onClick={handleCaseStudyClick}
+                className="block group/title cursor-pointer"
+              >
                 <h3 className="text-xl font-bold text-primary group-hover/title:text-accent-teal transition-colors mb-2 flex items-center justify-between gap-2">
                   <span>{project.title}</span>
                   <ArrowRight className="w-4 h-4 text-muted group-hover/title:text-accent-teal group-hover/title:translate-x-1 transition-all shrink-0" />
@@ -186,10 +198,11 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
         </div>
 
         {/* Footer Action Buttons */}
-        <div className="p-5 sm:p-6 pt-0 mt-auto flex flex-col gap-2.5 relative z-20">
+        <div className="p-5 sm:p-6 pt-0 mt-auto flex flex-col gap-2.5 relative z-30">
           <Link
             href={caseStudyUrl}
-            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-accent-teal/10 hover:bg-accent-teal text-accent-teal hover:text-dark-bg border border-accent-teal/30 hover:border-accent-teal transition-all duration-200 shadow-sm group/btn"
+            onClick={handleCaseStudyClick}
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-accent-teal/10 hover:bg-accent-teal text-accent-teal hover:text-dark-bg border border-accent-teal/30 hover:border-accent-teal transition-all duration-200 shadow-sm group/btn cursor-pointer"
           >
             <BookOpen className="w-3.5 h-3.5" />
             <span>Explore Case Study</span>

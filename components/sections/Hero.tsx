@@ -228,7 +228,7 @@ export const Hero: React.FC = () => {
                 <img
                   src={personalInfo.avatarUrl}
                   alt={personalInfo.name}
-                  className="w-full h-full object-cover object-top scale-120 group-hover:scale-125 transition-transform duration-500 filter contrast-[1.03]"
+                  className="w-full h-full object-cover object-top scale-105 group-hover:scale-110 transition-transform duration-500 filter contrast-[1.03]"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
                     const fallbackDiv = e.currentTarget.parentElement?.querySelector(
@@ -257,25 +257,27 @@ export const Hero: React.FC = () => {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute -top-3 -right-2 sm:-right-6 z-20"
+              className="absolute -top-6 sm:-top-10 right-1 sm:right-3 z-20"
             >
-              <Card className="p-3 shadow-2xl bg-dark-surface/90 border border-accent-teal/30 backdrop-blur-xl font-mono text-xs max-w-[210px] hidden sm:block">
-                <div className="flex items-center gap-1.5 mb-2 pb-1 border-b border-dark-border/60 text-[10px] text-muted">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                  <span className="ml-auto text-accent-teal font-semibold">yash.ts</span>
+              <Card className="p-2.5 sm:p-3 shadow-2xl bg-dark-surface/95 border border-accent-teal/40 backdrop-blur-xl font-mono text-[11px] hidden sm:block rounded-xl shadow-[0_10px_35px_rgba(0,0,0,0.6),0_0_25px_rgba(20,232,196,0.15)] whitespace-nowrap">
+                <div className="flex items-center gap-1.5 mb-1.5 pb-1 border-b border-dark-border/60 text-[10px] text-muted">
+                  <span className="w-2 h-2 rounded-full bg-red-500/80" />
+                  <span className="w-2 h-2 rounded-full bg-yellow-500/80" />
+                  <span className="w-2 h-2 rounded-full bg-green-500/80" />
+                  <span className="ml-auto text-accent-teal font-semibold text-[10px]">yash.ts</span>
                 </div>
-                <p className="text-muted">
-                  <span className="text-purple-400">const</span> engineer = &#123;
-                </p>
-                <p className="pl-3 text-muted">
-                  focus: <span className="text-accent-teal">&apos;AI & Systems&apos;</span>,
-                </p>
-                <p className="pl-3 text-muted">
-                  status: <span className="text-yellow-300">&apos;shipping...&apos;</span>
-                </p>
-                <p className="text-muted">&#125;;</p>
+                <div className="space-y-0.5 leading-snug">
+                  <p className="text-muted">
+                    <span className="text-purple-400 font-semibold">const</span> engineer = &#123;
+                  </p>
+                  <p className="pl-2.5 text-muted">
+                    focus: <span className="text-accent-teal">&apos;AI & Systems&apos;</span>,
+                  </p>
+                  <p className="pl-2.5 text-muted">
+                    status: <span className="text-yellow-300">&apos;shipping...&apos;</span>
+                  </p>
+                  <p className="text-muted">&#125;;</p>
+                </div>
               </Card>
             </motion.div>
 

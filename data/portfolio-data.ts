@@ -359,18 +359,6 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "#contact", sectionId: "contact" },
 ];
 
-export interface SkillItem {
-  name: string;
-  iconKey: string;
-  color?: string;
-}
-
-export interface SkillCategory {
-  id: string;
-  category: string;
-  skills: SkillItem[];
-}
-
 export const skillCategoriesData: SkillCategory[] = [
   {
     id: "frontend",
@@ -430,7 +418,6 @@ export const skillCategoriesData: SkillCategory[] = [
       { name: "Vercel", iconKey: "SiVercel", color: "#FFFFFF" },
       { name: "Render", iconKey: "SiRender", color: "#46E3B7" },
       { name: "CI/CD", iconKey: "SiGithubactions", color: "#2088FF" },
-      { name: "Nginx", iconKey: "SiNginx", color: "#009639" },
     ],
   },
 ];

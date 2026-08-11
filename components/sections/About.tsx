@@ -13,7 +13,6 @@ import {
   Rocket,
   ShieldCheck,
   Code2,
-  Trophy,
   Sparkles,
   CheckCircle2,
 } from "lucide-react";
@@ -39,7 +38,7 @@ export const About: React.FC = () => {
       <SectionBadge title="About Me" className="mb-6" />
 
       {/* Main Grid: Left Details & Right Interactive Profile Hero */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-10">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-10">
         
         {/* Left Column: Impactful Title, 3 Short Paragraphs, Core Competencies, Proof Stats */}
         <motion.div
@@ -125,13 +124,13 @@ export const About: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Right Column: Rotating Ring Image, Recruiter Hooks Glass Card, & Mini Timeline */}
+        {/* Right Column: Rotating Ring Image & Mini Profile Hero */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="lg:col-span-5 flex flex-col items-center gap-6"
+          className="lg:col-span-5 flex flex-col items-center justify-center gap-6"
         >
           {/* Profile Image Frame with Slow Rotating Glow Ring & Ambient AI Grid */}
           <div className="relative w-56 h-56 sm:w-72 sm:h-72 flex items-center justify-center">
@@ -170,31 +169,6 @@ export const About: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Recruiter Hook Glass Card */}
-          <div className="w-full rounded-2xl bg-dark-surface/90 border-2 border-accent-teal/50 p-4 sm:p-5 backdrop-blur-xl shadow-[0_0_30px_rgba(20,232,196,0.15)] space-y-3">
-            <h4 className="text-xs font-mono font-bold text-accent-teal uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-dark-border/60">
-              <Trophy className="w-4 h-4 text-accent-teal" />
-              Key Career Highlights
-            </h4>
-
-            <div className="space-y-2.5">
-              {aboutData.recruiterHooks.map((hook, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm">
-                  <span className="text-base leading-none shrink-0 mt-0.5">{hook.icon}</span>
-                  <div>
-                    <span className="font-bold text-primary block leading-tight">
-                      {hook.title}
-                    </span>
-                    <span className="text-[11px] font-mono text-muted">
-                      {hook.desc}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
         </motion.div>
       </div>
     </section>
@@ -202,3 +176,4 @@ export const About: React.FC = () => {
 };
 
 export default About;
+

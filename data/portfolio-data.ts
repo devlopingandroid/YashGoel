@@ -306,7 +306,7 @@ export const footerData = {
     },
   ],
   copyright: "© 2026 Yash Goel. All rights reserved.",
-  builtWith: "Designed & Built with ❤️ using Next.js & Tailwind CSS",
+  builtWith: "Designed & Built with ❤️ by Yash Goel",
 };
 
 export const resumeData = {

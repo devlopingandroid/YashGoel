@@ -658,6 +658,15 @@ export const certificatesData: Certificate[] = [
     image: "/certificates/leetcode-dsa.jpg",
     credentialUrl: "https://credential.example.com",
   },
+  {
+    id: "cert-patent-4",
+    title: "Technical Patent Grant #4 (Govt. of India)",
+    issuer: "Intellectual Property India",
+    year: "2025",
+    category: "Others",
+    image: "/certificates/patent4.jpg",
+    credentialUrl: "/certificates/patent4.jpg",
+  },
 ];
 
 export interface Achievement {
@@ -716,9 +725,9 @@ export const achievementsData: Achievement[] = [
     title: "4 Published Technical Patents",
     subtitle: "Intellectual Property India",
     year: "2024 - 2025",
-    image: "/achievements/achieve-11.jpeg",
+    image: "/certificates/patent4.jpg",
     tag: "Innovation & IP",
-    description: "Published 3 technical patents in IoT telemetry, sensor hardware, and embedded AI (Govt. of India).",
+    description: "Published 4 technical patents in IoT telemetry, sensor hardware, and embedded AI (Govt. of India).",
   },
   {
     id: "ach-sih-pitch",

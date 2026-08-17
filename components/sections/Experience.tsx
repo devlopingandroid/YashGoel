@@ -120,7 +120,7 @@ export const Experience: React.FC = () => {
 
       {/* 3D Coverflow Carousel Stage */}
       <div
-        className="relative w-full max-w-6xl mx-auto min-h-[460px] sm:min-h-[490px] flex items-center justify-center py-4 overflow-hidden touch-pan-y"
+        className="relative w-full max-w-6xl mx-auto min-h-[510px] sm:min-h-[540px] flex items-center justify-center py-4 overflow-hidden touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -144,7 +144,7 @@ export const Experience: React.FC = () => {
 
         {/* 3D Stage */}
         <div
-          className="relative w-full h-[440px] sm:h-[470px] flex items-center justify-center overflow-hidden"
+          className="relative w-full h-[490px] sm:h-[520px] flex items-center justify-center overflow-hidden"
           style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
         >
           {experienceData.map((item, index) => {
@@ -188,15 +188,17 @@ export const Experience: React.FC = () => {
                 }}
               >
                 <Card
-                  className={`p-5 sm:p-6 flex flex-col justify-between h-[430px] sm:h-[450px] transition-all duration-300 ${theme.cardBorder}`}
+                  className={`p-5 sm:p-6 flex flex-col justify-between h-[480px] sm:h-[500px] transition-all duration-300 ${theme.cardBorder}`}
                 >
-                  {/* Top Project Highlight Banner */}
-                  {item.projectHighlight && (
-                    <div className="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-dark-border/40">
-                      <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-semibold border ${theme.badge}`}>
-                        {theme.icon}
-                        <span>{item.projectHighlight}</span>
-                      </div>
+                  {/* Top Highlight & View Certificate Header Bar */}
+                  <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-dark-border/40 flex-wrap sm:flex-nowrap">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {item.projectHighlight && (
+                        <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-semibold border ${theme.badge}`}>
+                          {theme.icon}
+                          <span>{item.projectHighlight}</span>
+                        </div>
+                      )}
                       {item.current && (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-accent-teal/20 text-accent-teal border border-accent-teal/40 shadow-teal-glow">
                           <span className="w-1.5 h-1.5 rounded-full bg-accent-teal animate-pulse" />
@@ -204,7 +206,25 @@ export const Experience: React.FC = () => {
                         </span>
                       )}
                     </div>
-                  )}
+
+                    {item.certificateUrl && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedCert({
+                            role: item.role,
+                            company: item.company,
+                            certificateUrl: item.certificateUrl!,
+                          });
+                        }}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-mono font-bold bg-accent-teal/15 text-accent-teal border border-accent-teal/40 hover:bg-accent-teal hover:text-dark-surface hover:shadow-teal-glow transition-all duration-200 shrink-0 cursor-pointer ml-auto"
+                      >
+                        <Award className="w-3.5 h-3.5" />
+                        <span>View Certificate</span>
+                      </button>
+                    )}
+                  </div>
 
                   {/* Card Header: Role, Org Name, Logo */}
                   <div className="flex items-start justify-between gap-3 mb-2">
@@ -267,9 +287,9 @@ export const Experience: React.FC = () => {
                     ))}
                   </ul>
 
-                  {/* Tech Stack Chips & View Certificate Button */}
-                  <div className="flex items-center justify-between gap-2 pt-2 border-t border-dark-border/40 flex-wrap">
-                    <div className="flex flex-wrap gap-1.5 flex-1">
+                  {/* Tech Stack Chips & Footer Action Row */}
+                  <div className="pt-2.5 border-t border-dark-border/40 space-y-2.5 mt-auto">
+                    <div className="flex flex-wrap gap-1.5">
                       {item.technologies.map((tech, techIdx) => (
                         <span
                           key={techIdx}
@@ -279,22 +299,29 @@ export const Experience: React.FC = () => {
                         </span>
                       ))}
                     </div>
+
                     {item.certificateUrl && (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedCert({
-                            role: item.role,
-                            company: item.company,
-                            certificateUrl: item.certificateUrl!,
-                          });
-                        }}
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-mono font-bold bg-accent-teal/15 text-accent-teal border border-accent-teal/40 hover:bg-accent-teal hover:text-dark-surface hover:shadow-teal-glow transition-all duration-200 shrink-0"
-                      >
-                        <Award className="w-3.5 h-3.5" />
-                        <span>View Certificate</span>
-                      </button>
+                      <div className="flex items-center justify-between pt-1">
+                        <span className="text-[11px] font-mono text-muted flex items-center gap-1">
+                          <Award className="w-3.5 h-3.5 text-accent-teal" />
+                          <span>Verified Certificate</span>
+                        </span>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedCert({
+                              role: item.role,
+                              company: item.company,
+                              certificateUrl: item.certificateUrl!,
+                            });
+                          }}
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-mono font-bold bg-accent-teal text-dark-surface hover:bg-accent-teal-hover hover:shadow-teal-glow transition-all duration-200 cursor-pointer shrink-0"
+                        >
+                          <Award className="w-3.5 h-3.5" />
+                          <span>View Certificate</span>
+                        </button>
+                      </div>
                     )}
                   </div>
                 </Card>
@@ -345,7 +372,7 @@ export const Experience: React.FC = () => {
                     <span>{selectedCert.role}</span>
                   </h3>
                   <p className="text-xs font-mono text-accent-teal mt-0.5">
-                    {selectedCert.company} • Official Internship Certificate
+                    {selectedCert.company} ï¿½ Official Internship Certificate
                   </p>
                 </div>
                 <button

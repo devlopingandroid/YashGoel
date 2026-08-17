@@ -579,6 +579,36 @@ export const projectsData: Project[] = [
 
 export const certificatesData: Certificate[] = [
   {
+    id: "cert-infosys",
+    title: "Infosys Springboard SDE Internship",
+    issuer: "Infosys Springboard",
+    logo: "/logos/infosys.jpg",
+    year: "2026",
+    category: "Internships",
+    image: "/certificates/1-page-00001.jpg",
+    credentialUrl: "/certificates/1-page-00001.jpg",
+  },
+  {
+    id: "cert-drdo",
+    title: "Research Internship Excellence",
+    issuer: "DRDO SSPL",
+    logo: "/logos/drdo.png",
+    year: "2026",
+    category: "Internships",
+    image: "/certificates/2-page-00001.jpg",
+    credentialUrl: "/certificates/2-page-00001.jpg",
+  },
+  {
+    id: "cert-iiitd",
+    title: "IIIT Delhi Summer Research Internship",
+    issuer: "IIIT Delhi",
+    logo: "/logos/iiitd.jpg",
+    year: "2025",
+    category: "Internships",
+    image: "/certificates/Certificate_Yash Goel_mHelath 2025-page-00001.jpg",
+    credentialUrl: "/certificates/Certificate_Yash Goel_mHelath 2025-page-00001.jpg",
+  },
+  {
     id: "cert-google-cloud",
     title: "Google Cloud Computing Foundations",
     issuer: "Google Cloud",
@@ -586,16 +616,6 @@ export const certificatesData: Certificate[] = [
     year: "2024",
     category: "Courses",
     image: "/certificates/google-cloud.jpg",
-    credentialUrl: "https://credential.example.com",
-  },
-  {
-    id: "cert-drdo",
-    title: "Research Internship Excellence",
-    issuer: "DRDO SSPL",
-    logo: "/logos/drdo.png",
-    year: "2024",
-    category: "Internships",
-    image: "/certificates/drdo-internship.jpg",
     credentialUrl: "https://credential.example.com",
   },
   {

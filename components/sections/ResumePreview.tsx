@@ -75,7 +75,7 @@ export const ResumePreview: React.FC = () => {
                 Summary
               </h4>
               <p className="text-slate-700 text-xs leading-relaxed">
-                Software Engineer specializing in Full-Stack Systems (Java, Spring Boot, React, Node.js) and AI pipelines with 3 research internships, 3 patents, and hackathon wins.
+                Software Engineer specializing in Full-Stack Systems (Java, Spring Boot, React, Node.js) and AI pipelines with 3 research internships, 4 patents, and hackathon wins.
               </p>
             </div>
 

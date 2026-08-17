@@ -56,6 +56,7 @@ export interface ExperienceItem {
   theme?: "teal" | "blue" | "purple";
   bullets: string[];
   technologies: string[];
+  certificateUrl?: string;
 }
 
 export const experienceData: ExperienceItem[] = [
@@ -76,6 +77,7 @@ export const experienceData: ExperienceItem[] = [
       "Collaborated using Git CI/CD workflows adhering to enterprise coding standards."
     ],
     technologies: ["Angular", "SpringBoot", "Java", "MySQL", "JWT", "REST API", "Git"],
+    certificateUrl: "/certificates/1-page-00001.jpg",
   },
   {
     id: "exp-drdo",
@@ -94,6 +96,7 @@ export const experienceData: ExperienceItem[] = [
       "Integrated automated unit testing suites to ensure high reliability and uptime."
     ],
     technologies: ["Java", "SpringBoot", "MySQL", "Backend", "Git", "Software Development"],
+    certificateUrl: "/certificates/2-page-00001.jpg",
   },
   {
     id: "exp-iiitd",
@@ -112,6 +115,7 @@ export const experienceData: ExperienceItem[] = [
       "Automated feature extraction workflows to accelerate research iteration cycles."
     ],
     technologies: ["Python", "Data Analysis", "Healthcare AI", "Research", "NumPy", "Data Processing"],
+    certificateUrl: "/certificates/Certificate_Yash Goel_mHelath 2025-page-00001.jpg",
   },
 ];
 
@@ -238,7 +242,7 @@ export interface JourneyMilestone {
 
 export const aboutData = {
   heading: "Building Scalable Systems & AI Products",
-  subheading: "Software Engineer • Full-Stack Developer • 3x Patent Publisher",
+  subheading: "Software Engineer • Full-Stack Developer • 4x Patent Publisher",
   paragraphs: [
     "Computer Science undergrad at VIPS Delhi with software engineering experience at DRDO SSPL, IIIT Delhi, and Infosys Springboard.",
     "Specializing in full-stack web applications and scalable backend APIs using Java, Spring Boot, React, Node.js, and cloud services."
@@ -253,12 +257,12 @@ export const aboutData = {
     { id: "astat-1", number: "3", label: "Internships Completed" },
     { id: "astat-2", number: "150+", label: "DSA Problems Solved" },
     { id: "astat-3", number: "20+", label: "Hackathons & Events" },
-    { id: "astat-4", number: "3", label: "Published Patents", isHighlight: true }
+    { id: "astat-4", number: "4", label: "Published Patents", isHighlight: true }
   ] as AboutStat[],
   recruiterHooks: [
     { icon: "🏆", title: "Qualcomm Multiverse Winner", desc: "Snapdragon AI & IoT Hardware Bot" },
     { icon: "🚀", title: "Gemini Student Ambassador 2026", desc: "Google Campus AI Face" },
-    { icon: "📜", title: "3 Published Technical Patents", desc: "IoT Sensors & Hardware Telemetry" },
+    { icon: "📜", title: "4 Published Technical Patents", desc: "IoT Sensors & Hardware Telemetry" },
     { icon: "💻", title: "150+ LeetCode Solved", desc: "Data Structures & Algorithms" },
   ]
 };
@@ -345,7 +349,7 @@ export const personalInfo: PersonalInfo = {
 export const heroStats: StatItem[] = [
   { id: "stat-1", number: "3", label: "Internships", iconName: "Briefcase" },
   { id: "stat-2", number: "150+", label: "DSA Problems", iconName: "Cpu" },
-  { id: "stat-3", number: "3", label: "Patents", iconName: "Award" },
+  { id: "stat-3", number: "4", label: "Patents", iconName: "Award" },
 ];
 
 export const navLinks: NavLink[] = [
@@ -689,7 +693,7 @@ export const achievementsData: Achievement[] = [
   },
   {
     id: "ach-patents",
-    title: "3 Published Technical Patents",
+    title: "4 Published Technical Patents",
     subtitle: "Intellectual Property India",
     year: "2024 - 2025",
     image: "/achievements/achieve-11.jpeg",
@@ -841,6 +845,14 @@ export const galleryData: GalleryItem[] = [
     category: "Publications",
     image: "/certificates/patent3-page-00003.jpg",
     caption: "Official Published Patent Certificate for AI Computer Vision & Cryptographic Verification.",
+    spanClass: "md:col-span-1 md:row-span-1",
+  },
+  {
+    id: "gal-pub-patent4",
+    title: "Patent Grant #4 (Govt. of India)",
+    category: "Publications",
+    image: "/certificates/patent4.jpg",
+    caption: "Official Published Patent Certificate (4th Patent Publication) from the Indian Patent Office (Govt. of India).",
     spanClass: "md:col-span-1 md:row-span-1",
   },
   {

@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { motion, PanInfo } from "framer-motion";
+import { motion, PanInfo, AnimatePresence } from "framer-motion";
 import { experienceData } from "@/data/portfolio-data";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Card from "@/components/ui/Card";
@@ -16,6 +16,9 @@ import {
   Sparkles,
   ShieldCheck,
   Activity,
+  Award,
+  X,
+  ExternalLink,
 } from "lucide-react";
 
 const getThemeStyles = (theme?: "teal" | "blue" | "purple", isCenter?: boolean) => {
@@ -58,6 +61,11 @@ export const Experience: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [selectedCert, setSelectedCert] = useState<{
+    role: string;
+    company: string;
+    certificateUrl: string;
+  } | null>(null);
 
   const total = experienceData.length;
 
@@ -86,12 +94,22 @@ export const Experience: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || selectedCert) return;
     const timer = setInterval(() => {
       handleNext();
     }, 5000);
     return () => clearInterval(timer);
-  }, [isPaused, handleNext]);
+  }, [isPaused, selectedCert, handleNext]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedCert(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <section
@@ -249,16 +267,35 @@ export const Experience: React.FC = () => {
                     ))}
                   </ul>
 
-                  {/* Tech Stack Chips */}
-                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-dark-border/40">
-                    {item.technologies.map((tech, techIdx) => (
-                      <span
-                        key={techIdx}
-                        className={`px-2.5 py-0.5 rounded-md text-[11px] font-mono font-medium border ${theme.chip}`}
+                  {/* Tech Stack Chips & View Certificate Button */}
+                  <div className="flex items-center justify-between gap-2 pt-2 border-t border-dark-border/40 flex-wrap">
+                    <div className="flex flex-wrap gap-1.5 flex-1">
+                      {item.technologies.map((tech, techIdx) => (
+                        <span
+                          key={techIdx}
+                          className={`px-2.5 py-0.5 rounded-md text-[11px] font-mono font-medium border ${theme.chip}`}
+                        >
+                          #{tech}
+                        </span>
+                      ))}
+                    </div>
+                    {item.certificateUrl && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedCert({
+                            role: item.role,
+                            company: item.company,
+                            certificateUrl: item.certificateUrl!,
+                          });
+                        }}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-mono font-bold bg-accent-teal/15 text-accent-teal border border-accent-teal/40 hover:bg-accent-teal hover:text-dark-surface hover:shadow-teal-glow transition-all duration-200 shrink-0"
                       >
-                        #{tech}
-                      </span>
-                    ))}
+                        <Award className="w-3.5 h-3.5" />
+                        <span>View Certificate</span>
+                      </button>
+                    )}
                   </div>
                 </Card>
               </motion.div>
@@ -282,6 +319,72 @@ export const Experience: React.FC = () => {
           />
         ))}
       </div>
+
+      {/* Certificate Viewer Modal */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedCert(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full bg-dark-surface border border-dark-border rounded-2xl p-4 sm:p-6 overflow-hidden shadow-2xl"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between pb-4 mb-4 border-b border-dark-border">
+                <div>
+                  <h3 className="text-base sm:text-xl font-bold text-primary flex items-center gap-2">
+                    <Award className="w-5 h-5 text-accent-teal" />
+                    <span>{selectedCert.role}</span>
+                  </h3>
+                  <p className="text-xs font-mono text-accent-teal mt-0.5">
+                    {selectedCert.company} • Official Internship Certificate
+                  </p>
+                </div>
+                <button
+                  onClick={() => setSelectedCert(null)}
+                  className="p-2 rounded-lg bg-dark-border/50 text-muted hover:text-primary hover:bg-dark-border transition-colors"
+                  aria-label="Close Modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Certificate Image View */}
+              <div className="relative max-h-[70vh] flex items-center justify-center overflow-auto rounded-xl bg-black/40 p-2 border border-dark-border/60">
+                <img
+                  src={selectedCert.certificateUrl}
+                  alt={`${selectedCert.company} Certificate`}
+                  className="max-h-[65vh] w-auto object-contain rounded-lg shadow-lg"
+                />
+              </div>
+
+              {/* Modal Footer */}
+              <div className="flex items-center justify-between pt-4 mt-4 border-t border-dark-border">
+                <span className="text-xs font-mono text-muted">
+                  Verified Industry & Research Credential
+                </span>
+                <a
+                  href={selectedCert.certificateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-accent-teal text-dark-surface hover:shadow-teal-glow transition-all"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Open Full Certificate</span>
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

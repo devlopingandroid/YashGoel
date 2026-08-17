@@ -58,7 +58,7 @@ const achievementCards: AchievementCard[] = [
   {
     id: "patents",
     icon: "📜",
-    title: "3 Published Patents",
+    title: "4 Published Patents",
     desc: "AI & Intelligent Systems Research",
     badge: "Govt. of India",
   },

@@ -1,4 +1,4 @@
-export interface PersonalInfo {
+﻿export interface PersonalInfo {
   name: string;
   firstName: string;
   lastName: string;
@@ -378,6 +378,7 @@ export const skillCategoriesData: SkillCategory[] = [
       { name: "CSS", iconKey: "SiCss3", color: "#1572B6" },
     ],
   },
+
   {
     id: "backend",
     category: "Backend",

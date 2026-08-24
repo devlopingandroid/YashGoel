@@ -370,6 +370,7 @@ export const skillCategoriesData: SkillCategory[] = [
     skills: [
       { name: "React", iconKey: "SiReact", color: "#61DAFB" },
       { name: "Next.js", iconKey: "SiNextdotjs", color: "#FFFFFF" },
+      { name: "Angular", iconKey: "SiAngular", color: "#DD0031" },
       { name: "Tailwind", iconKey: "SiTailwindcss", color: "#06B6D4" },
       { name: "Redux", iconKey: "SiRedux", color: "#764ABC" },
       { name: "JavaScript", iconKey: "SiJavascript", color: "#F7DF1E" },
@@ -381,6 +382,7 @@ export const skillCategoriesData: SkillCategory[] = [
     id: "backend",
     category: "Backend",
     skills: [
+      { name: "Spring Boot", iconKey: "SiSpringboot", color: "#6DB33F" },
       { name: "Node.js", iconKey: "SiNodedotjs", color: "#5FA04E" },
       { name: "Express.js", iconKey: "SiExpress", color: "#E0E0E0" },
       { name: "MongoDB", iconKey: "SiMongodb", color: "#47A248" },

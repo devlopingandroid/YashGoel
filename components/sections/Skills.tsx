@@ -8,6 +8,8 @@ import Card from "@/components/ui/Card";
 import {
   SiReact,
   SiNextdotjs,
+  SiAngular,
+  SiSpringboot,
   SiTailwindcss,
   SiRedux,
   SiJavascript,
@@ -58,6 +60,10 @@ const renderBrandIcon = (iconKey: string, color?: string) => {
       return <SiReact {...iconProps} />;
     case "SiNextdotjs":
       return <SiNextdotjs {...iconProps} />;
+    case "SiAngular":
+      return <SiAngular {...iconProps} />;
+    case "SiSpringboot":
+      return <SiSpringboot {...iconProps} />;
     case "SiTailwindcss":
       return <SiTailwindcss {...iconProps} />;
     case "SiRedux":

@@ -260,10 +260,10 @@ export const aboutData = {
     { id: "astat-4", number: "4", label: "Published Patents", isHighlight: true }
   ] as AboutStat[],
   recruiterHooks: [
-    { icon: "🏆", title: "Qualcomm Multiverse Winner", desc: "Snapdragon AI & IoT Hardware Bot" },
-    { icon: "🚀", title: "Gemini Student Ambassador 2026", desc: "Google Campus AI Face" },
-    { icon: "📜", title: "4 Published Technical Patents", desc: "IoT Sensors & Hardware Telemetry" },
-    { icon: "💻", title: "150+ LeetCode Solved", desc: "Data Structures & Algorithms" },
+    { icon: "Trophy", title: "Qualcomm Multiverse Winner", desc: "Snapdragon AI & IoT Hardware Bot" },
+    { icon: "Rocket", title: "Gemini Student Ambassador 2026", desc: "Google Campus AI Face" },
+    { icon: "Award", title: "4 Published Technical Patents", desc: "IoT Sensors & Hardware Telemetry" },
+    { icon: "Code", title: "150+ LeetCode Solved", desc: "Data Structures & Algorithms" },
   ]
 };
 

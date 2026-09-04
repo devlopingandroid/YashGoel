@@ -15,6 +15,10 @@ import {
   Mail,
   Terminal,
   Code2,
+  Building2,
+  Sparkles,
+  Trophy,
+  Layers,
 } from "lucide-react";
 
 const getStatIcon = (iconName: string) => {
@@ -34,7 +38,7 @@ const getStatIcon = (iconName: string) => {
 
 interface AchievementCard {
   id: string;
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   desc: string;
   badge: string;
@@ -43,35 +47,35 @@ interface AchievementCard {
 const achievementCards: AchievementCard[] = [
   {
     id: "drdo",
-    icon: "🏛",
+    icon: <Building2 className="w-5 h-5 text-accent-teal" />,
     title: "DRDO Intern",
     desc: "Worked on real-world engineering projects",
     badge: "Defense R&D",
   },
   {
     id: "gemini",
-    icon: "🤖",
+    icon: <Sparkles className="w-5 h-5 text-accent-teal" />,
     title: "Google Gemini Ambassador",
     desc: "Representing AI innovation initiatives",
     badge: "Campus AI Face",
   },
   {
     id: "patents",
-    icon: "📜",
+    icon: <Award className="w-5 h-5 text-accent-teal" />,
     title: "4 Published Patents",
     desc: "AI & Intelligent Systems Research",
     badge: "Govt. of India",
   },
   {
     id: "cyi",
-    icon: "🏆",
+    icon: <Trophy className="w-5 h-5 text-accent-teal" />,
     title: "IIT Delhi Top 100 Ideathon",
     desc: "National-level innovation recognition",
     badge: "CYI Finalist",
   },
   {
     id: "fullstack",
-    icon: "💻",
+    icon: <Layers className="w-5 h-5 text-accent-teal" />,
     title: "Full Stack Developer",
     desc: "Building scalable web applications",
     badge: "Next.js & AI",
@@ -298,7 +302,7 @@ export const Hero: React.FC = () => {
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
                   <div className="p-3.5 bg-white/95 dark:bg-stone-900/95 border border-stone-200/90 dark:border-stone-800 backdrop-blur-xl rounded-2xl shadow-lg flex items-center gap-3.5">
-                    <div className="text-2xl p-2 rounded-xl bg-orange-500/10 border border-orange-500/20 shrink-0 flex items-center justify-center w-11 h-11 text-accent-teal">
+                    <div className="p-2.5 rounded-xl bg-orange-500/10 border border-orange-500/20 shrink-0 flex items-center justify-center w-10 h-10 text-accent-teal">
                       {activeCard.icon}
                     </div>
                     <div className="flex-1 min-w-0">

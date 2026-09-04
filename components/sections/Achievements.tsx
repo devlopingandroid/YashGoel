@@ -47,10 +47,6 @@ export const Achievements: React.FC = () => {
       <div className="relative w-full space-y-6 py-2 overflow-hidden">
         {/* Row 1: Left to Right Marquee */}
         <div className="relative w-full overflow-hidden group pause-on-hover">
-          {/* Gradient Edge Blurs */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-dark-bg to-transparent z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-dark-bg to-transparent z-20 pointer-events-none" />
-
           <div className="flex gap-5 w-max animate-marquee-right">
             {marqueeRow1.map((item, idx) => (
               <AchievementPosterCard
@@ -64,10 +60,6 @@ export const Achievements: React.FC = () => {
 
         {/* Row 2: Right to Left Marquee */}
         <div className="relative w-full overflow-hidden group pause-on-hover">
-          {/* Gradient Edge Blurs */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-dark-bg to-transparent z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-dark-bg to-transparent z-20 pointer-events-none" />
-
           <div className="flex gap-5 w-max animate-marquee-left">
             {marqueeRow2.map((item, idx) => (
               <AchievementPosterCard
@@ -113,11 +105,11 @@ export const Achievements: React.FC = () => {
                   alt={selectedAchievement.title}
                   className="w-full h-full object-contain sm:object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
                 {/* Badge Tag on Image */}
                 <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-accent-teal/20 text-accent-teal border border-accent-teal/40 backdrop-blur-md">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-black/60 text-accent-teal border border-accent-teal/40 backdrop-blur-md">
                     {selectedAchievement.tag}
                   </span>
                   {selectedAchievement.isHero && (
@@ -165,39 +157,39 @@ const AchievementPosterCard: React.FC<AchievementPosterCardProps> = ({ item, onC
   return (
     <div
       onClick={onClick}
-      className="group relative w-[280px] sm:w-[340px] h-[200px] sm:h-[230px] rounded-2xl overflow-hidden cursor-pointer bg-dark-surface/80 border border-dark-border hover:border-accent-teal/70 shadow-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.3)] transition-all duration-300 hover:scale-[1.03] shrink-0"
+      className="group relative w-[280px] sm:w-[340px] h-[200px] sm:h-[230px] rounded-2xl overflow-hidden cursor-pointer bg-dark-surface border border-dark-border hover:border-accent-teal/70 shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] shrink-0"
     >
-      {/* Background Poster Image */}
+      {/* Background Poster Image - crisp, sharp, unblurred */}
       <img
         src={item.image}
         alt={item.title}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
 
-      {/* Dark Overlay Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/95 via-dark-bg/40 to-transparent transition-opacity group-hover:opacity-90" />
+      {/* Crisp Dark Bottom Vignette - only at the bottom for legibility, no milky blur */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent transition-opacity group-hover:opacity-95" />
 
       {/* Top Badge Tag */}
       <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
-        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-dark-bg/80 text-accent-teal border border-accent-teal/30 backdrop-blur-md">
+        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-black/60 text-accent-teal border border-accent-teal/30 backdrop-blur-sm">
           {item.tag}
         </span>
       </div>
 
       {/* Expand Icon Indicator on Hover */}
-      <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-full bg-accent-teal text-dark-bg shadow-teal-glow">
+      <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-full bg-accent-teal text-white shadow-md">
         <Maximize2 className="w-3.5 h-3.5" />
       </div>
 
-      {/* Bottom Text Content */}
+      {/* Bottom Text Content with strong contrast */}
       <div className="absolute bottom-0 left-0 right-0 p-4 z-10 space-y-1">
         <div className="flex items-center gap-2 text-[11px] font-mono text-accent-teal">
           <span>{item.year}</span>
           <span>•</span>
-          <span className="truncate">{item.subtitle}</span>
+          <span className="truncate text-stone-300">{item.subtitle}</span>
         </div>
 
-        <h4 className="text-sm sm:text-base font-bold text-primary tracking-tight line-clamp-1 group-hover:text-accent-teal transition-colors">
+        <h4 className="text-sm sm:text-base font-bold text-white tracking-tight line-clamp-1 group-hover:text-accent-teal transition-colors">
           {item.title}
         </h4>
       </div>

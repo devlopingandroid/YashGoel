@@ -174,21 +174,21 @@ export const Gallery: React.FC = () => {
                 </div>
 
                 {/* Overlaid Bottom Gradient & Hover Captions */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-between p-4 z-10">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity flex flex-col justify-between p-4 z-10">
                   <div className="flex justify-between items-start">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-dark-bg/85 text-accent-teal border border-accent-teal/30">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-black/60 text-accent-teal border border-accent-teal/40 backdrop-blur-sm">
                       {item.category}
                     </span>
-                    <div className="p-1.5 rounded-lg bg-dark-bg/70 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="p-1.5 rounded-lg bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity">
                       <Maximize2 className="w-3.5 h-3.5" />
                     </div>
                   </div>
 
                   <div>
-                    <h4 className="text-sm sm:text-base font-bold text-primary group-hover:text-accent-teal transition-colors leading-tight">
+                    <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-accent-teal transition-colors leading-tight">
                       {item.title}
                     </h4>
-                    <p className="text-xs text-muted/90 line-clamp-1 mt-0.5 font-sans">
+                    <p className="text-xs text-stone-300 line-clamp-1 mt-0.5 font-sans">
                       {item.caption}
                     </p>
                   </div>

@@ -189,7 +189,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ project }) => {
           />
 
           {/* Dark Gradient Overlay for high-end contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/40 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
           {/* Floating Feature Highlights on Cover */}
           <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex items-end justify-between gap-4 pointer-events-none">

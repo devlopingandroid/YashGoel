@@ -71,7 +71,7 @@ export const Hackathons: React.FC = () => {
               </div>
 
               {/* Dark Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/60 to-transparent flex flex-col justify-end p-5 z-10">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-5 z-10">
                 {/* Result Status & Year Line */}
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
                   <span
@@ -81,19 +81,19 @@ export const Hackathons: React.FC = () => {
                   >
                     {item.result}
                   </span>
-                  <span className="text-[10px] font-mono text-muted bg-dark-bg/80 px-2 py-0.5 rounded-md border border-dark-border/60">
+                  <span className="text-[10px] font-mono text-stone-300 bg-black/60 px-2 py-0.5 rounded-md border border-white/10">
                     {item.year}
                   </span>
                 </div>
 
                 {/* Hackathon Title */}
-                <h3 className="text-base sm:text-lg font-extrabold text-primary group-hover:text-accent-teal transition-colors tracking-tight">
+                <h3 className="text-base sm:text-lg font-extrabold text-white group-hover:text-accent-teal transition-colors tracking-tight">
                   {item.name}
                 </h3>
 
                 {/* Optional Project Subtitle */}
                 {item.projectTitle && (
-                  <p className="text-xs font-mono text-muted/90 line-clamp-1 mt-0.5">
+                  <p className="text-xs font-mono text-stone-300 line-clamp-1 mt-0.5">
                     {item.projectTitle}
                   </p>
                 )}

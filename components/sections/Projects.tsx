@@ -161,7 +161,7 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
             </div>
 
             {/* Subtle Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity pointer-events-none" />
           </Link>
 
           {/* Card Content Body */}

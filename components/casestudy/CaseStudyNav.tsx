@@ -102,7 +102,7 @@ export const CaseStudyNav: React.FC = () => {
       {/* Top Edge Reading Progress Indicator */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-dark-surface z-50">
         <div
-          className="h-full bg-gradient-to-r from-accent-teal via-teal-400 to-accent-teal transition-all duration-150 ease-out shadow-[0_0_8px_rgba(20,232,196,0.6)]"
+          className="h-full bg-gradient-to-r from-accent-teal via-orange-400 to-accent-teal transition-all duration-150 ease-out shadow-[0_0_8px_rgba(249,115,22,0.6)]"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
@@ -161,7 +161,7 @@ export const CaseStudyNav: React.FC = () => {
                     <span className="truncate">{sec.label}</span>
                   </div>
                   {isActive && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent-teal shadow-[0_0_6px_rgba(20,232,196,0.8)]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent-teal shadow-[0_0_6px_rgba(249,115,22,0.8)]" />
                   )}
                 </a>
               );

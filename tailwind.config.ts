@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,29 +11,28 @@ const config: Config = {
     extend: {
       colors: {
         dark: {
-          bg: "#0a0e14",
-          surface: "#131820",
-          border: "#1f2733",
+          bg: "rgb(var(--color-bg) / <alpha-value>)",
+          surface: "rgb(var(--color-surface) / <alpha-value>)",
+          border: "rgb(var(--color-border) / <alpha-value>)",
         },
         accent: {
-          teal: "#14e8c4",
-          "teal-hover": "#10c9aa",
-          "teal-glow": "rgba(20, 232, 196, 0.15)",
+          teal: "rgb(var(--color-accent) / <alpha-value>)",
+          "teal-hover": "rgb(var(--color-accent-hover) / <alpha-value>)",
+          "teal-glow": "var(--color-accent-glow)",
         },
-        primary: "#e6e6e6",
-        muted: "#8b93a1",
+        primary: "rgb(var(--color-primary) / <alpha-value>)",
+        muted: "rgb(var(--color-muted) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
         mono: ["var(--font-jetbrains)", "monospace"],
       },
       boxShadow: {
-        "teal-glow": "0 0 25px rgba(20, 232, 196, 0.2)",
-        "card-subtle": "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
+        "teal-glow": "var(--shadow-glow)",
+        "card-subtle": "var(--shadow-card)",
       },
     },
   },
   plugins: [],
 };
 export default config;
-

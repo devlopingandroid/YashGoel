@@ -143,8 +143,8 @@ export const Contact: React.FC = () => {
       name: "Twitter / X",
       handle: "@yashbuilds_",
       url: personalInfo.socialLinks.twitter,
-      icon: <FaXTwitter className="w-5 h-5 text-primary group-hover:text-cyan-400 transition-colors" />,
-      badgeColor: "border-cyan-500/30 hover:border-cyan-500/60",
+      icon: <FaXTwitter className="w-5 h-5 text-primary group-hover:text-accent-teal transition-colors" />,
+      badgeColor: "border-accent-teal/30 hover:border-accent-teal/60",
     },
   ];
 

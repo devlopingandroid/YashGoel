@@ -10,13 +10,13 @@ import { ArrowRight, Trophy } from "lucide-react";
 const getResultBadgeStyle = (result: string) => {
   switch (result) {
     case "Runner Up":
-      return "bg-amber-500/20 text-amber-300 border-amber-500/40";
+      return "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40";
     case "Finalist":
-      return "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+      return "bg-orange-500/15 text-orange-700 dark:text-orange-300 border-orange-500/40";
     case "Top 100":
-      return "bg-cyan-500/20 text-cyan-300 border-cyan-500/40";
+      return "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40";
     default:
-      return "bg-accent-teal/20 text-accent-teal border-accent-teal/40";
+      return "bg-accent-teal/15 text-accent-teal border-accent-teal/40";
   }
 };
 

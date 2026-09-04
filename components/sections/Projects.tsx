@@ -100,7 +100,7 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
           <div
             className="pointer-events-none absolute -inset-px rounded-2xl opacity-100 transition-opacity duration-300 z-10"
             style={{
-              background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(45, 212, 191, 0.12), transparent 70%)`,
+              background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(234, 88, 12, 0.08), transparent 70%)`,
             }}
           />
         )}
@@ -202,7 +202,7 @@ const ProjectCard3D: React.FC<{ project: Project; index: number }> = ({
           <Link
             href={caseStudyUrl}
             onClick={handleCaseStudyClick}
-            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-accent-teal/10 hover:bg-accent-teal text-accent-teal hover:text-dark-bg border border-accent-teal/30 hover:border-accent-teal transition-all duration-200 shadow-sm group/btn cursor-pointer"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-accent-teal/10 hover:bg-accent-teal text-accent-teal hover:text-white border border-accent-teal/30 hover:border-accent-teal transition-all duration-200 shadow-sm group/btn cursor-pointer"
           >
             <BookOpen className="w-3.5 h-3.5" />
             <span>Explore Case Study</span>

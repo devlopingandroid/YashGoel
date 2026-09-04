@@ -57,7 +57,7 @@ export const ResumePreview: React.FC = () => {
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                     {personalInfo.name}
                   </h3>
-                  <p className="text-sm font-semibold text-teal-700 font-mono">
+                  <p className="text-sm font-semibold text-accent-teal font-mono">
                     {personalInfo.role}
                   </p>
                 </div>
@@ -71,7 +71,7 @@ export const ResumePreview: React.FC = () => {
 
             {/* Resume Summary */}
             <div className="mb-4">
-              <h4 className="text-xs font-bold font-mono text-slate-900 uppercase tracking-wider mb-1 text-teal-800">
+              <h4 className="text-xs font-bold font-mono uppercase tracking-wider mb-1 text-orange-950">
                 Summary
               </h4>
               <p className="text-slate-700 text-xs leading-relaxed">
@@ -81,8 +81,8 @@ export const ResumePreview: React.FC = () => {
 
             {/* Resume Experience */}
             <div className="mb-4">
-              <h4 className="text-xs font-bold font-mono text-slate-900 uppercase tracking-wider mb-2 text-teal-800 flex items-center gap-1.5">
-                <Briefcase className="w-3.5 h-3.5 text-teal-700" />
+              <h4 className="text-xs font-bold font-mono uppercase tracking-wider mb-2 text-orange-950 flex items-center gap-1.5">
+                <Briefcase className="w-3.5 h-3.5 text-accent-teal" />
                 Experience Highlights
               </h4>
               <div className="space-y-2">
@@ -109,8 +109,8 @@ export const ResumePreview: React.FC = () => {
 
             {/* Resume Featured Projects */}
             <div className="mb-4">
-              <h4 className="text-xs font-bold font-mono text-slate-900 uppercase tracking-wider mb-2 text-teal-800 flex items-center gap-1.5">
-                <Code className="w-3.5 h-3.5 text-teal-700" />
+              <h4 className="text-xs font-bold font-mono uppercase tracking-wider mb-2 text-orange-950 flex items-center gap-1.5">
+                <Code className="w-3.5 h-3.5 text-accent-teal" />
                 Featured Projects
               </h4>
               <div className="space-y-1.5">
@@ -128,7 +128,7 @@ export const ResumePreview: React.FC = () => {
             {/* Resume Skills & Education */}
             <div className="grid grid-cols-2 gap-4 pt-2 border-t border-slate-200">
               <div>
-                <h4 className="text-[11px] font-bold font-mono text-teal-800 uppercase mb-1">
+                <h4 className="text-[11px] font-bold font-mono text-orange-950 uppercase mb-1">
                   Core Technologies
                 </h4>
                 <p className="text-[11px] text-slate-700 font-mono">
@@ -136,7 +136,7 @@ export const ResumePreview: React.FC = () => {
                 </p>
               </div>
               <div>
-                <h4 className="text-[11px] font-bold font-mono text-teal-800 uppercase mb-1">
+                <h4 className="text-[11px] font-bold font-mono text-orange-950 uppercase mb-1">
                   Education
                 </h4>
                 <p className="text-[11px] text-slate-700 font-mono">
@@ -178,7 +178,7 @@ export const ResumePreview: React.FC = () => {
                     cx="60"
                     cy="60"
                     r={circleRadius}
-                    className="text-dark-bg stroke-current"
+                    className="text-dark-border stroke-current"
                     strokeWidth="10"
                     fill="transparent"
                   />

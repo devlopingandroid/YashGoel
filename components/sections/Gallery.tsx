@@ -106,7 +106,7 @@ export const Gallery: React.FC = () => {
               }}
               className={`px-3.5 py-1.5 text-xs font-mono font-medium rounded-lg whitespace-nowrap transition-all border flex items-center gap-1.5 ${
                 isActive
-                  ? "bg-accent-teal text-dark-bg font-bold border-accent-teal shadow-sm"
+                  ? "bg-accent-teal text-white font-bold border-accent-teal shadow-sm"
                   : "bg-dark-surface/90 text-muted border-dark-border hover:text-primary hover:border-accent-teal/40"
               }`}
             >
@@ -114,7 +114,7 @@ export const Gallery: React.FC = () => {
               <span
                 className={`text-[10px] px-1.5 py-0.2 rounded-md ${
                   isActive
-                    ? "bg-dark-bg/20 text-dark-bg font-extrabold"
+                    ? "bg-white/25 text-white font-extrabold"
                     : "bg-dark-bg text-muted/80"
                 }`}
               >

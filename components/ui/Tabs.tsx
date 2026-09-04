@@ -40,7 +40,7 @@ export const Tabs: React.FC<TabsProps> = ({
             onClick={() => handleTabClick(tab.id)}
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap flex items-center gap-2 ${
               isActive
-                ? "bg-accent-teal text-dark-bg font-semibold shadow-sm"
+                ? "bg-accent-teal text-white font-semibold shadow-sm"
                 : "text-muted hover:text-primary hover:bg-dark-border/40"
             }`}
           >
@@ -49,7 +49,7 @@ export const Tabs: React.FC<TabsProps> = ({
               <span
                 className={`text-xs px-2 py-0.5 rounded-full font-mono ${
                   isActive
-                    ? "bg-dark-bg/20 text-dark-bg"
+                    ? "bg-white/25 text-white"
                     : "bg-dark-border text-muted"
                 }`}
               >

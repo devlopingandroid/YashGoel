@@ -9,6 +9,7 @@ import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { SiLeetcode } from "react-icons/si";
 import Button from "@/components/ui/Button";
 import ResumeModal from "@/components/ui/ResumeModal";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -68,8 +69,8 @@ export const Navbar: React.FC = () => {
       <header
         className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-dark-bg/90 backdrop-blur-xl border-b border-dark-border/80 shadow-2xl py-3"
-            : "bg-dark-bg/70 backdrop-blur-md border-b border-dark-border/40 py-4"
+            ? "bg-white/85 dark:bg-[#0F0E0C]/85 backdrop-blur-xl border-b border-stone-200/70 dark:border-stone-800/70 shadow-sm py-3"
+            : "bg-white/70 dark:bg-[#0F0E0C]/70 backdrop-blur-md border-b border-stone-200/40 dark:border-stone-800/40 py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
@@ -82,7 +83,7 @@ export const Navbar: React.FC = () => {
             <img
               src="/logo.png"
               alt="Yash Goel Logo"
-              className="h-9 sm:h-10 w-auto object-contain group-hover:scale-105 transition-transform"
+              className="h-9 sm:h-10 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-[0_1px_2px_rgba(0,0,0,0.1)]"
             />
             <div>
               <h1 className="font-extrabold text-base sm:text-lg text-primary leading-tight tracking-tight">
@@ -94,8 +95,8 @@ export const Navbar: React.FC = () => {
             </div>
           </a>
 
-          {/* Desktop Center Navigation Links with 3D Sliding Pill */}
-          <nav className="hidden xl:flex items-center gap-1 bg-dark-surface/80 p-1.5 rounded-2xl border border-dark-border/80 backdrop-blur-xl shadow-inner">
+          {/* Desktop Center Navigation Links with Modern Sliding Pill */}
+          <nav className="hidden xl:flex items-center gap-1 bg-stone-100/70 dark:bg-stone-900/60 p-1.5 rounded-2xl border border-stone-200/70 dark:border-stone-800/80 backdrop-blur-xl">
             {navLinks.map((link) => {
               const isActive = activeSection === link.sectionId;
               return (
@@ -106,14 +107,14 @@ export const Navbar: React.FC = () => {
                   className={`relative px-3.5 py-1.5 rounded-xl text-xs font-medium transition-colors duration-200 ${
                     isActive
                       ? "text-accent-teal font-bold"
-                      : "text-muted hover:text-primary hover:bg-dark-bg/40"
+                      : "text-muted hover:text-primary hover:bg-stone-200/40 dark:hover:bg-stone-800/40"
                   }`}
                 >
-                  {/* Sliding 3D Active Pill */}
+                  {/* Sliding Elevated Active Pill */}
                   {isActive && (
                     <motion.div
                       layoutId="navbarActivePill"
-                      className="absolute inset-0 bg-accent-teal/15 border border-accent-teal/50 rounded-xl shadow-[0_0_15px_rgba(20,232,196,0.25)]"
+                      className="absolute inset-0 bg-white dark:bg-stone-800 border border-stone-200/90 dark:border-stone-700/80 rounded-xl shadow-sm"
                       transition={{
                         type: "spring",
                         stiffness: 380,
@@ -171,12 +172,15 @@ export const Navbar: React.FC = () => {
               </a>
             </div>
 
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* Resume Buttons */}
             <Button
               onClick={() => setIsResumeModalOpen(true)}
               variant="outline"
               size="sm"
-              className="text-xs px-3 py-1.5"
+              className="text-xs px-3.5 py-1.5 bg-white/80 dark:bg-stone-900/80 border-stone-200/90 dark:border-stone-800 text-stone-700 dark:text-stone-300 hover:text-accent-teal hover:border-accent-teal/40 shadow-sm font-medium"
               icon={<Eye className="w-3.5 h-3.5" />}
             >
               Preview
@@ -188,21 +192,24 @@ export const Navbar: React.FC = () => {
               target="_blank"
               variant="primary"
               size="sm"
-              className="text-xs px-3 py-1.5"
+              className="text-xs px-3.5 py-1.5 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-semibold shadow-sm shadow-orange-500/20 border-none"
               icon={<FileDown className="w-3.5 h-3.5" />}
             >
               Download
             </Button>
           </div>
 
-          {/* Mobile Hamburger Menu Button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="xl:hidden p-2.5 rounded-xl bg-dark-surface border border-dark-border text-primary hover:text-accent-teal focus:outline-none transition-colors"
-            aria-label="Toggle Navigation Menu"
-          >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Controls: Theme Toggle & Hamburger Menu Button */}
+          <div className="flex items-center gap-2 xl:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2.5 rounded-xl bg-dark-surface border border-dark-border text-primary hover:text-accent-teal focus:outline-none transition-colors"
+              aria-label="Toggle Navigation Menu"
+            >
+              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -276,6 +283,10 @@ export const Navbar: React.FC = () => {
                   >
                     Download
                   </Button>
+                </div>
+
+                <div className="flex items-center justify-center">
+                  <ThemeToggle showLabel={true} className="w-full justify-center py-2" />
                 </div>
 
                 <div className="flex items-center justify-center gap-4 text-muted">

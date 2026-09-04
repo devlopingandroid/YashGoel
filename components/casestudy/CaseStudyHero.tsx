@@ -89,7 +89,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ project }) => {
           </span>
 
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-dark-surface text-muted border border-dark-border">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-accent-teal animate-pulse" />
             {project.status}
           </span>
         </div>
@@ -252,7 +252,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ project }) => {
         <div className="bg-dark-surface/80 border border-dark-border rounded-xl p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between text-muted mb-2">
             <span className="text-[11px] font-mono uppercase tracking-wider">Status</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <CheckCircle2 className="w-4 h-4 text-accent-teal" />
           </div>
           <span className="text-sm sm:text-base font-bold font-mono text-primary">
             {project.quickStats.status}

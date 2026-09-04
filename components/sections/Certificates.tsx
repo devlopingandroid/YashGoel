@@ -64,7 +64,7 @@ export const Certificates: React.FC = () => {
               onClick={() => setActiveCategory(cat)}
               className={`px-3.5 py-1.5 text-xs font-mono font-medium rounded-lg whitespace-nowrap transition-all border ${
                 isActive
-                  ? "bg-accent-teal text-dark-bg font-bold border-accent-teal shadow-sm"
+                  ? "bg-accent-teal text-white font-bold border-accent-teal shadow-sm"
                   : "bg-dark-surface/90 text-muted border-dark-border hover:text-primary hover:border-accent-teal/40"
               }`}
             >

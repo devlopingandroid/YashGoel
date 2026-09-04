@@ -26,28 +26,28 @@ const getThemeStyles = (theme?: "teal" | "blue" | "purple", isCenter?: boolean) 
     case "blue":
       return {
         cardBorder: isCenter
-          ? "border-2 border-blue-500/80 bg-gradient-to-b from-dark-surface via-dark-surface to-blue-950/25 shadow-[0_0_35px_rgba(59,130,246,0.25)]"
+          ? "border-2 border-blue-500/80 bg-gradient-to-b from-dark-surface via-dark-surface to-blue-500/10 shadow-[0_0_35px_rgba(59,130,246,0.2)]"
           : "border-blue-500/30 bg-dark-surface/90",
-        badge: "bg-blue-500/15 text-blue-400 border-blue-500/30",
-        icon: <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />,
-        textAccent: "text-blue-400",
-        chip: "bg-blue-950/40 text-blue-300 border-blue-500/30",
+        badge: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/30",
+        icon: <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />,
+        textAccent: "text-blue-600 dark:text-blue-400",
+        chip: "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/30",
       };
     case "purple":
       return {
         cardBorder: isCenter
-          ? "border-2 border-purple-500/80 bg-gradient-to-b from-dark-surface via-dark-surface to-purple-950/25 shadow-[0_0_35px_rgba(168,85,247,0.25)]"
+          ? "border-2 border-purple-500/80 bg-gradient-to-b from-dark-surface via-dark-surface to-purple-500/10 shadow-[0_0_35px_rgba(168,85,247,0.2)]"
           : "border-purple-500/30 bg-dark-surface/90",
-        badge: "bg-purple-500/15 text-purple-400 border-purple-500/30",
-        icon: <Activity className="w-3.5 h-3.5 text-purple-400" />,
-        textAccent: "text-purple-400",
-        chip: "bg-purple-950/40 text-purple-300 border-purple-500/30",
+        badge: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30",
+        icon: <Activity className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />,
+        textAccent: "text-purple-600 dark:text-purple-400",
+        chip: "bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/30",
       };
     case "teal":
     default:
       return {
         cardBorder: isCenter
-          ? "border-2 border-accent-teal/80 bg-gradient-to-b from-dark-surface via-dark-surface to-accent-teal/15 shadow-[0_0_35px_rgba(20,232,196,0.25)]"
+          ? "border-2 border-accent-teal/80 bg-gradient-to-b from-dark-surface via-dark-surface to-accent-teal/15 shadow-teal-glow"
           : "border-accent-teal/30 bg-dark-surface/90",
         badge: "bg-accent-teal/15 text-accent-teal border-accent-teal/30",
         icon: <Sparkles className="w-3.5 h-3.5 text-accent-teal animate-pulse" />,

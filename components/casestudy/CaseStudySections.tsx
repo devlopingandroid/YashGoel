@@ -259,7 +259,7 @@ export const CaseStudySections: React.FC<CaseStudySectionsProps> = ({ project })
               <ul className="space-y-2.5">
                 {project.problemAnalysis.validatedAssumptions.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-muted">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-accent-teal shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -630,7 +630,7 @@ export const CaseStudySections: React.FC<CaseStudySectionsProps> = ({ project })
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-xs text-muted">
               {project.authAndSecurity.securityHeaders.map((header, hIdx) => (
                 <div key={hIdx} className="flex items-center gap-2 bg-dark-surface px-3 py-1.5 rounded border border-dark-border/60">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-accent-teal shrink-0" />
                   <span className="truncate">{header}</span>
                 </div>
               ))}
@@ -718,7 +718,7 @@ export const CaseStudySections: React.FC<CaseStudySectionsProps> = ({ project })
                 {/* Footer Matrix */}
                 <div className="space-y-2 pt-3 border-t border-dark-border/60">
                   <div className="bg-dark-surface p-2.5 rounded-lg border border-dark-border/60">
-                    <span className="text-[10px] font-mono text-emerald-400 block mb-0.5">
+                    <span className="text-[10px] font-mono text-accent-teal block mb-0.5">
                       Business Value:
                     </span>
                     <span className="text-xs text-primary/90 font-medium">
@@ -768,7 +768,7 @@ export const CaseStudySections: React.FC<CaseStudySectionsProps> = ({ project })
                   </div>
 
                   {chal.metricDelta && (
-                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-accent-teal/15 text-accent-teal border border-accent-teal/30">
                       {chal.metricDelta}
                     </span>
                   )}
@@ -806,7 +806,7 @@ export const CaseStudySections: React.FC<CaseStudySectionsProps> = ({ project })
                 </div>
 
                 {/* Verified Outcome */}
-                <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
+                <div className="flex items-center gap-2 text-xs font-mono text-accent-teal">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
                   <span>Outcome: {chal.outcome}</span>
                 </div>
@@ -866,7 +866,7 @@ export const CaseStudySections: React.FC<CaseStudySectionsProps> = ({ project })
                     ))}
                   </div>
 
-                  <div className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded border border-emerald-500/20">
+                  <div className="text-xs font-mono text-accent-teal bg-accent-teal/10 px-3 py-1.5 rounded border border-accent-teal/20">
                     Milestone: {stage.keyMilestone}
                   </div>
                 </div>
@@ -902,7 +902,7 @@ export const CaseStudySections: React.FC<CaseStudySectionsProps> = ({ project })
                     {metric.label}
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                <span className="text-[11px] font-mono text-accent-teal bg-accent-teal/10 px-2 py-0.5 rounded border border-accent-teal/20">
                   {metric.change}
                 </span>
               </div>
@@ -912,7 +912,7 @@ export const CaseStudySections: React.FC<CaseStudySectionsProps> = ({ project })
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-dark-bg/80 border border-dark-border rounded-xl p-5">
               <h3 className="text-base font-bold text-primary mb-3 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <CheckCircle2 className="w-4 h-4 text-accent-teal" />
                 <span>Major Achievements</span>
               </h3>
               <ul className="space-y-2 text-xs sm:text-sm text-muted">

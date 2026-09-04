@@ -1,4 +1,4 @@
-﻿export interface PersonalInfo {
+export interface PersonalInfo {
   name: string;
   firstName: string;
   lastName: string;
@@ -350,6 +350,7 @@ export const heroStats: StatItem[] = [
   { id: "stat-1", number: "3", label: "Internships", iconName: "Briefcase" },
   { id: "stat-2", number: "150+", label: "DSA Problems", iconName: "Cpu" },
   { id: "stat-3", number: "4", label: "Patents", iconName: "Award" },
+  { id: "stat-4", number: "10+", label: "Projects Built", iconName: "Code" },
 ];
 
 export const navLinks: NavLink[] = [

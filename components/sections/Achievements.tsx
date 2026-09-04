@@ -95,7 +95,7 @@ export const Achievements: React.FC = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-3xl rounded-3xl bg-gradient-to-b from-dark-surface to-dark-bg border-2 border-accent-teal/60 shadow-[0_0_50px_rgba(20,232,196,0.25)] overflow-hidden"
+              className="relative w-full max-w-3xl rounded-3xl bg-gradient-to-b from-dark-surface to-dark-bg border-2 border-accent-teal/60 shadow-[0_0_50px_rgba(249,115,22,0.25)] overflow-hidden"
             >
               {/* Close Button */}
               <button
@@ -165,7 +165,7 @@ const AchievementPosterCard: React.FC<AchievementPosterCardProps> = ({ item, onC
   return (
     <div
       onClick={onClick}
-      className="group relative w-[280px] sm:w-[340px] h-[200px] sm:h-[230px] rounded-2xl overflow-hidden cursor-pointer bg-dark-surface/80 border border-dark-border hover:border-accent-teal/70 shadow-lg hover:shadow-[0_0_30px_rgba(20,232,196,0.3)] transition-all duration-300 hover:scale-[1.03] shrink-0"
+      className="group relative w-[280px] sm:w-[340px] h-[200px] sm:h-[230px] rounded-2xl overflow-hidden cursor-pointer bg-dark-surface/80 border border-dark-border hover:border-accent-teal/70 shadow-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.3)] transition-all duration-300 hover:scale-[1.03] shrink-0"
     >
       {/* Background Poster Image */}
       <img

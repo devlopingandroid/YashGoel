@@ -135,15 +135,15 @@ export const About: React.FC = () => {
           {/* Profile Image Frame with Slow Rotating Glow Ring & Ambient AI Grid */}
           <div className="relative w-56 h-56 sm:w-72 sm:h-72 flex items-center justify-center">
             
-            {/* Ambient AI Grid Glow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-accent-teal/20 via-blue-500/10 to-purple-500/20 rounded-full blur-2xl animate-pulse" />
+            {/* Ambient Warm Glow */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/10 via-amber-500/5 to-transparent rounded-full blur-2xl" />
 
-            {/* Outer Slow Rotating Neon Glow Ring */}
-            <div className="absolute -inset-3 rounded-full border-2 border-dashed border-accent-teal/60 animate-spin-slow" />
-            <div className="absolute -inset-6 rounded-full border border-accent-teal/20" />
+            {/* Outer Slow Rotating Architectural Ring */}
+            <div className="absolute -inset-3 rounded-full border border-dashed border-orange-500/30 animate-spin-slow" />
+            <div className="absolute -inset-6 rounded-full border border-orange-500/15" />
 
             {/* Circular Image Container */}
-            <div className="relative w-full h-full rounded-full p-2 border-2 border-accent-teal/60 bg-dark-surface shadow-[0_0_40px_rgba(20,232,196,0.25)] overflow-hidden group">
+            <div className="relative w-full h-full rounded-full p-2 border border-stone-200/90 dark:border-stone-800 bg-white dark:bg-stone-900 shadow-xl shadow-stone-900/5 dark:shadow-black/40 overflow-hidden group">
               <div className="w-full h-full rounded-full overflow-hidden relative">
                 <img
                   src="/about.jpeg"

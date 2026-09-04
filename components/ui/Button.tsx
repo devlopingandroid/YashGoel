@@ -28,7 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      "bg-accent-teal text-dark-bg font-semibold hover:bg-accent-teal-hover hover:shadow-teal-glow",
+      "bg-accent-teal text-white font-semibold hover:bg-accent-teal-hover hover:shadow-teal-glow shadow-sm",
     outline:
       "border border-accent-teal/40 text-accent-teal hover:bg-accent-teal/10 hover:border-accent-teal",
     ghost:

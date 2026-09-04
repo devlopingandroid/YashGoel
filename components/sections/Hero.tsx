@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { personalInfo, heroStats } from "@/data/portfolio-data";
 import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
 import {
   Briefcase,
   Code,

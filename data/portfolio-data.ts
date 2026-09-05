@@ -68,15 +68,15 @@ export const experienceData: ExperienceItem[] = [
     period: "Jul 2026 – Sep 2026",
     location: "Remote",
     current: true,
-    projectHighlight: "Civic Complaint Management System",
+    projectHighlight: "Civic Grievance Management System",
     theme: "teal",
     bullets: [
-      "Built Civic Complaint Management System with Angular, Spring Boot, & MySQL featuring JWT role-based access.",
-      "Designed REST APIs for complaint registration, lifecycle workflows, and admin dashboards.",
-      "Optimized MySQL queries and backend microservices, significantly cutting API response latency.",
-      "Collaborated using Git CI/CD workflows adhering to enterprise coding standards."
+      "Engineered an end-to-end civic complaint portal enabling citizens to submit public infrastructure issues and track real-time resolution stages.",
+      "Implemented secure role-based access control (RBAC) using Spring Security and JWT, segregating citizen, field officer, and municipal admin permissions.",
+      "Developed 15+ REST endpoints in Spring Boot with modular service/DAO layers, optimizing MySQL indexes for rapid search and status filtering.",
+      "Constructed dynamic citizen-facing dashboards in Angular with reactive form validation, live status counters, and responsive mobile-first layouts."
     ],
-    technologies: ["Angular", "SpringBoot", "Java", "MySQL", "JWT", "REST API", "Git"],
+    technologies: ["Angular", "Spring Boot", "Java", "MySQL", "JWT", "REST APIs", "Git"],
     certificateUrl: "/certificates/1-page-00001.jpg",
   },
   {
@@ -87,15 +87,15 @@ export const experienceData: ExperienceItem[] = [
     period: "Jun 2026 – Aug 2026",
     location: "Delhi, India",
     current: false,
-    projectHighlight: "Budget Management Platform",
+    projectHighlight: "Defense Research Expenditure Platform",
     theme: "blue",
     bullets: [
-      "Developed Budget Management Platform for real-time expenditure tracking and financial record keeping.",
-      "Built scalable backend services in Java & Spring Boot with DRDO research scientists.",
-      "Contributed to core architecture design, streamlining department budget allocation.",
-      "Integrated automated unit testing suites to ensure high reliability and uptime."
+      "Developed an internal web platform for defense scientists to track research grants, equipment procurements, and divisional expenditure in real time.",
+      "Translated complex government administrative procedures into clean Java & Spring Boot backend services with multi-tier approval workflows.",
+      "Designed normalized relational database schemas in MySQL with audit logging to replace manual paper trail and spreadsheet reconciliation.",
+      "Wrote comprehensive unit test suites using JUnit and Mockito, ensuring reliable data transactions across high-priority defense accounts."
     ],
-    technologies: ["Java", "SpringBoot", "MySQL", "Backend", "Git", "Software Development"],
+    technologies: ["Java", "Spring Boot", "MySQL", "JUnit", "Mockito", "REST APIs", "Git"],
     certificateUrl: "/certificates/2-page-00001.jpg",
   },
   {
@@ -106,15 +106,15 @@ export const experienceData: ExperienceItem[] = [
     period: "Jun 2025 – Aug 2025",
     location: "New Delhi, India",
     current: false,
-    projectHighlight: "Healthcare Sensor Analytics",
+    projectHighlight: "Wearable Biosensor Analytics",
     theme: "purple",
     bullets: [
-      "Built Python pipelines processing 10,000+ physiological sensor records for healthcare AI research.",
-      "Created modular preprocessing scripts, reducing dataset normalization time by 40%.",
-      "Conducted statistical analysis and experimental validation for ML predictive models.",
-      "Automated feature extraction workflows to accelerate research iteration cycles."
+      "Worked with researchers at the Mobile Computing lab to process raw physiological signals (PPG and accelerometer) from wearable health devices.",
+      "Built automated Python data pipelines with NumPy and SciPy to denoise raw time-series feeds and clean motion artifacts across 10,000+ recordings.",
+      "Extracted time-domain and spectral biometric features used by the research group to train experimental cardiovascular predictive models.",
+      "Standardized data preprocessing benchmarks into modular scripts and documented reproducible workflows in Jupyter notebooks for lab publication."
     ],
-    technologies: ["Python", "Data Analysis", "Healthcare AI", "Research", "NumPy", "Data Processing"],
+    technologies: ["Python", "NumPy", "SciPy", "Pandas", "Signal Processing", "Jupyter", "Data Analysis"],
     certificateUrl: "/certificates/Certificate_Yash Goel_mHelath 2025-page-00001.jpg",
   },
 ];
@@ -241,17 +241,16 @@ export interface JourneyMilestone {
 }
 
 export const aboutData = {
-  heading: "Building Scalable Systems & AI Products",
-  subheading: "Software Engineer • Full-Stack Developer • 4x Patent Publisher",
+  heading: "Building Scalable Systems & Solving Real Problems",
   paragraphs: [
-    "Computer Science undergrad at VIPS Delhi with software engineering experience at DRDO SSPL, IIIT Delhi, and Infosys Springboard.",
-    "Specializing in full-stack web applications and scalable backend APIs using Java, Spring Boot, React, Node.js, and cloud services."
+    "I'm a prefinal-year Computer Science undergrad at VIPS Delhi. I’ve always been driven by a curiosity for how systems operate beneath the surface, which led me down the path of backend architecture, full-stack engineering, and distributed systems.",
+    "Over the course of my journey, I've had the opportunity to build software in diverse settings—from developing defense research expenditure platforms at DRDO SSPL and processing biosensor data pipelines at IIIT Delhi, to architecting civic grievance systems at Infosys Springboard.",
   ],
   traits: [
     { id: "skill-1", label: "Backend Systems", iconName: "Server" },
-    { id: "skill-2", label: "AI & Research", iconName: "Brain" },
-    { id: "skill-3", label: "Competitive Coding", iconName: "Terminal" },
-    { id: "skill-4", label: "Product Building", iconName: "Rocket" }
+    { id: "skill-2", label: "Full-Stack Development", iconName: "Rocket" },
+    { id: "skill-3", label: "Data Structures & Algos", iconName: "Terminal" },
+    { id: "skill-4", label: "Applied AI & Research", iconName: "Brain" }
   ] as TraitItem[],
   stats: [
     { id: "astat-1", number: "3", label: "Internships Completed" },

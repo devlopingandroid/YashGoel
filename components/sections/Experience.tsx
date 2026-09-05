@@ -26,31 +26,31 @@ const getThemeStyles = (theme?: "teal" | "blue" | "purple", isCenter?: boolean) 
     case "blue":
       return {
         cardBorder: isCenter
-          ? "border-2 border-blue-500/80 bg-gradient-to-b from-dark-surface via-dark-surface to-blue-500/10 shadow-[0_0_35px_rgba(59,130,246,0.2)]"
-          : "border-blue-500/30 bg-dark-surface/90",
-        badge: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/30",
-        icon: <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />,
-        textAccent: "text-blue-600 dark:text-blue-400",
-        chip: "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/30",
+          ? "border-2 border-amber-500/80 bg-gradient-to-b from-dark-surface via-dark-surface to-amber-500/10 shadow-[0_10px_35px_rgba(217,119,6,0.18)]"
+          : "border-amber-500/30 bg-dark-surface/90",
+        badge: "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30",
+        icon: <ShieldCheck className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />,
+        textAccent: "text-amber-600 dark:text-amber-400",
+        chip: "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30",
       };
     case "purple":
       return {
         cardBorder: isCenter
-          ? "border-2 border-purple-500/80 bg-gradient-to-b from-dark-surface via-dark-surface to-purple-500/10 shadow-[0_0_35px_rgba(168,85,247,0.2)]"
-          : "border-purple-500/30 bg-dark-surface/90",
-        badge: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30",
-        icon: <Activity className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />,
-        textAccent: "text-purple-600 dark:text-purple-400",
-        chip: "bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/30",
+          ? "border-2 border-stone-600/80 dark:border-stone-400/80 bg-gradient-to-b from-dark-surface via-dark-surface to-stone-500/10 shadow-[0_10px_35px_rgba(120,113,108,0.18)]"
+          : "border-stone-400/30 bg-dark-surface/90",
+        badge: "bg-stone-500/10 text-stone-700 dark:text-stone-300 border-stone-400/30",
+        icon: <Activity className="w-3.5 h-3.5 text-stone-600 dark:text-stone-400" />,
+        textAccent: "text-stone-700 dark:text-stone-300",
+        chip: "bg-stone-500/10 text-stone-700 dark:text-stone-300 border-stone-400/30",
       };
     case "teal":
     default:
       return {
         cardBorder: isCenter
-          ? "border-2 border-accent-teal/80 bg-gradient-to-b from-dark-surface via-dark-surface to-accent-teal/15 shadow-teal-glow"
+          ? "border-2 border-accent-teal/80 bg-gradient-to-b from-dark-surface via-dark-surface to-accent-teal/15 shadow-[0_10px_35px_rgba(234,88,12,0.18)]"
           : "border-accent-teal/30 bg-dark-surface/90",
         badge: "bg-accent-teal/15 text-accent-teal border-accent-teal/30",
-        icon: <Sparkles className="w-3.5 h-3.5 text-accent-teal animate-pulse" />,
+        icon: <Sparkles className="w-3.5 h-3.5 text-accent-teal" />,
         textAccent: "text-accent-teal",
         chip: "bg-accent-teal/10 text-accent-teal border-accent-teal/20",
       };
@@ -97,7 +97,7 @@ export const Experience: React.FC = () => {
     if (isPaused || selectedCert) return;
     const timer = setInterval(() => {
       handleNext();
-    }, 5000);
+    }, 8500);
     return () => clearInterval(timer);
   }, [isPaused, selectedCert, handleNext]);
 
@@ -116,7 +116,26 @@ export const Experience: React.FC = () => {
       id="experience"
       className="pt-4 md:pt-6 pb-12 md:pb-16 scroll-mt-4 md:scroll-mt-6 border-t border-dark-border/40 overflow-hidden"
     >
-      <SectionBadge title="Work Experience" className="mb-6" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+        <SectionBadge title="Work Experience" className="mb-0" />
+
+        {/* Quick Company Selector Pills */}
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-dark-surface border border-dark-border self-start sm:self-auto overflow-x-auto shadow-sm">
+          {experienceData.map((item, idx) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveIndex(idx)}
+              className={`px-3 py-1 rounded-lg text-xs font-mono transition-all duration-200 cursor-pointer ${
+                activeIndex === idx
+                  ? "bg-accent-teal text-white shadow-sm font-bold"
+                  : "text-muted hover:text-primary hover:bg-dark-border/30 font-medium"
+              }`}
+            >
+              {item.company}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* 3D Coverflow Carousel Stage */}
       <div
@@ -190,8 +209,8 @@ export const Experience: React.FC = () => {
                 <Card
                   className={`p-5 sm:p-6 flex flex-col justify-between h-[480px] sm:h-[500px] transition-all duration-300 ${theme.cardBorder}`}
                 >
-                  {/* Top Highlight & View Certificate Header Bar */}
-                  <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-dark-border/40 flex-wrap sm:flex-nowrap">
+                  {/* Top Project Highlight & Status Header Bar */}
+                  <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-dark-border/40">
                     <div className="flex items-center gap-2 flex-wrap">
                       {item.projectHighlight && (
                         <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-semibold border ${theme.badge}`}>
@@ -200,30 +219,12 @@ export const Experience: React.FC = () => {
                         </div>
                       )}
                       {item.current && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-accent-teal/20 text-accent-teal border border-accent-teal/40 shadow-teal-glow">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-accent-teal/15 text-accent-teal border border-accent-teal/30">
                           <span className="w-1.5 h-1.5 rounded-full bg-accent-teal animate-pulse" />
                           Most Recent
                         </span>
                       )}
                     </div>
-
-                    {item.certificateUrl && (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedCert({
-                            role: item.role,
-                            company: item.company,
-                            certificateUrl: item.certificateUrl!,
-                          });
-                        }}
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-mono font-bold bg-accent-teal/15 text-accent-teal border border-accent-teal/40 hover:bg-accent-teal hover:text-dark-surface hover:shadow-teal-glow transition-all duration-200 shrink-0 cursor-pointer ml-auto"
-                      >
-                        <Award className="w-3.5 h-3.5" />
-                        <span>View Certificate</span>
-                      </button>
-                    )}
                   </div>
 
                   {/* Card Header: Role, Org Name, Logo */}
@@ -316,7 +317,7 @@ export const Experience: React.FC = () => {
                               certificateUrl: item.certificateUrl!,
                             });
                           }}
-                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-mono font-bold bg-accent-teal text-dark-surface hover:bg-accent-teal-hover hover:shadow-teal-glow transition-all duration-200 cursor-pointer shrink-0"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold bg-accent-teal text-white hover:bg-accent-teal-hover shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer shrink-0"
                         >
                           <Award className="w-3.5 h-3.5" />
                           <span>View Certificate</span>
